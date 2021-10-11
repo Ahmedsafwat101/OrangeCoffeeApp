@@ -4,8 +4,8 @@ plugins {
     id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
     id 'kotlin-kapt'
     id 'androidx.navigation.safeargs.kotlin'
-    id 'com.google.gms.google-services'
     id 'dagger.hilt.android.plugin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -88,31 +88,8 @@ dependencies {
     implementation("com.google.dagger:hilt-android:2.38.1")
     kapt("com.google.dagger:hilt-android-compiler:2.38.1")
 
-    //Hilt for testing
-    androidTestImplementation("com.google.dagger:hilt-android-testing:2.38.1")
-    kaptAndroidTest("com.google.dagger:hilt-android-compiler:2.38.1")
-
-    //Espresso
-    def androidx_test_espresso = "3.4.0"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$androidx_test_espresso"
-    androidTestImplementation "androidx.test.espresso:espresso-contrib:$androidx_test_espresso"
-
-    // androidx.test
-    def androidx_test = "1.4.0"
-    androidTestImplementation "androidx.test:runner:$androidx_test"
-    androidTestImplementation "androidx.test:core:$androidx_test"
-
-    //preference manager
-    implementation "androidx.preference:preference-ktx:1.1.1"
 
 
-    // Firebase Cloud Firestore (Kotlin)
-    implementation 'com.google.firebase:firebase-firestore-ktx:23.0.4'
-
-    testImplementation 'app.cash.turbine:turbine:0.6.1'
 
 
-    testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.5.1"
-
-    testImplementation "androidx.arch.core:core-testing:2.1.0"
 }

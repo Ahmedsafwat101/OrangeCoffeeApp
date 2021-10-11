@@ -8,17 +8,17 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:812061582451:android:bb7eaa73df80d78154f606",
+        "mobilesdk_app_id": "1:812061582451:android:0c704fbca5dafe3554f606",
         "android_client_info": {
-          "package_name": "com.mycoffeeapp"
+          "package_name": "com.orangecoffeeapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "812061582451-584gi8ofjp404lrufmakj4qhgnkvcq0q.apps.googleusercontent.com",
+          "client_id": "812061582451-dgv7gfkq9eml39v3r04trepf706s6g2n.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.mycoffeeapp",
+            "package_name": "com.orangecoffeeapp",
             "certificate_hash": "246fb79cd4e38dc813bfd39b087497d1b3e187e7"
           }
         },
