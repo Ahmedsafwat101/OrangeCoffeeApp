@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:screenOrientation="portrait"
+    android:layout_margin="@dimen/margin_medium"
     tools:context=".ui.useradmission.LogInFragment">
 
     <FrameLayout
@@ -109,7 +110,7 @@
                     android:id="@+id/sigInTxt"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="SignIn "
+                    android:text="@string/signup"
                     android:textColor="@color/Coffee_200"
                     android:textSize="16sp"
                     android:textStyle="bold" />
