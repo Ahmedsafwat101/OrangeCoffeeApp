@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ShapeAppearanceOverlay.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+        <item name="strokeColor">@color/green_300</item>
+        <item name="strokeWidth">3dp</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+
+    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">16dp</item>
+        <item name="cornerSizeTopLeft">16dp</item>
+        <item name="cornerSizeBottomRight">0dp</item>
+        <item name="cornerSizeBottomLeft">0dp</item>
+    </style>
+
+    <style name="Coffee.ShapeAppearanceOverlay.Card.TopRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">50%</item>
+        <item name="cornerSizeTopRight">50%</item>
+        <item name="cornerSizeBottomLeft">0%</item>
+        <item name="cornerSizeBottomRight">0%</item>
+    </style>
+
+    <style name="Coffee.ShapeAppearance.Button" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">20%</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+    <style name="Coffee.ShapeAppearance.CardSheet" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">@dimen/card_sheet_radius_default</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+    <style name="Coffee.ShapeAppearance.CardSheetBottomCorners" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSizeBottomRight">@dimen/card_sheet_radius</item>
+        <item name="cornerSizeBottomLeft">@dimen/card_sheet_radius</item>
+        <item name="cornerSizeTopRight">0dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+
+    <style name="Coffee.ShapeAppearance.TextInputLayout" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">@dimen/text_input_layout_radius</item>
+        <item name="cornerFamily">rounded</item>
+    </style>
+
+
+    <style name="Coffee.ShapeOverlay.Chip" parent="">
+        <item name="cornerSize">20%</item>
+    </style>
+
+    <style name="Coffee.ShapeAppearance.Card.Rounded" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerSize">15%</item>
+    </style>
+
+
+
+    <style name="Coffee.ShapeAppearance.imageView.RoundedCorner" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerSize">10%</item>
+    </style>
+
+
+    <style name="SwitchTheme" parent="Theme.AppCompat.Light">
+        <item name="android:colorControlActivated">@color/green_300</item>
+    </style>
+
+</resources>

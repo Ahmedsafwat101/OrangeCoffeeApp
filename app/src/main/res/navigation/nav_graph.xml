@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/logInFragment">
+
+    <fragment
+        android:id="@+id/logInFragment"
+        android:name="com.orangecoffeeapp.ui.useradmission.LogInFragment"
+        android:label="fragment_log_in"
+        tools:layout="@layout/fragment_log_in" >
+        <action
+            android:id="@+id/action_logInFragment_to_ownerHomeFragment"
+            app:destination="@id/ownerHomeFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_customerHomeFragment"
+            app:destination="@id/customerHomeFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.orangecoffeeapp.ui.userhome.AdminHomeFragment"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" />
+    <fragment
+        android:id="@+id/customerHomeFragment"
+        android:name="com.orangecoffeeapp.ui.userhome.CustomerHomeFragment"
+        android:label="fragment_customer_home"
+        tools:layout="@layout/fragment_customer_home" />
+    <fragment
+        android:id="@+id/ownerHomeFragment"
+        android:name="com.orangecoffeeapp.ui.userhome.OwnerHomeFragment"
+        android:label="fragment_owner_home"
+        tools:layout="@layout/fragment_owner_home" />
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.orangecoffeeapp.ui.useradmission.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" />
+</navigation>

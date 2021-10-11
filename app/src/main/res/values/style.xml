@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Material Input layout-->
+    <style name="InputEditTextCustomStyle.OutlinedBox" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeWidth">@dimen/text_input_layout_stroke</item>
+        <item name="shapeAppearance">@style/Coffee.ShapeAppearance.TextInputLayout</item>
+    </style>
+
+
+    <style name="CustomButton" parent="Widget.MaterialComponents.Button" >
+        <item name="textAllCaps">false</item>
+        <item name="shapeAppearance">@style/Coffee.ShapeAppearance.Button</item>
+        <item name="fontFamily">@font/nunito_bold</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:padding">8dp</item>
+    </style>
+</resources>

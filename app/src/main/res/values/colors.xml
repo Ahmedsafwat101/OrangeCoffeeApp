@@ -7,4 +7,60 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+
+    <color name="whiteGray">#D8D8D8	</color>
+
+    <!-- Teal palette -->
+    <color name="teal_300">#9affff</color>
+    <color name="teal_400">#64d5d6</color>
+    <color name="teal_500">#26a3a5</color>
+
+
+    <!-- Orange palette -->
+    <color name="orange_300">#ff9978</color>
+    <color name="orange_400">#f3684b</color>
+    <color name="orange_500">#ba3721</color>
+
+
+    <!---Splash Screen Colors-->
+    <color name="green_100">#d8f3dc</color>
+    <color name="green_200">#95d5b2</color>
+    <color name="green_300">#74c69d</color>
+    <color name="green_400">#52b788</color>
+    <color name="green_500">#40916c</color>
+    <color name="green_600">#2D6A4F</color>
+
+
+    <!-- OffWhite -->
+    <color name="offWhite_100">#F9F9F9</color>
+
+    <!-- Gray -->
+    <color name="gray_200">#F2F2F2</color>
+
+
+
+    <!-- Black -->
+    <color name="black_200">#3A3B3C</color>
+
+
+    <!-- Black -->
+    <color name="blue_100">#168aad</color>
+    <color name="blue_700">#0A3040</color>
+
+
+    <color name="Blue_200">#06224A</color>
+    <color name="Blue_100">#03B5FF</color>
+    <color name="Orange_200">#FCC196</color>
+    <color name="Yellow_300">#FFB947</color>
+    <color name="Red_200">#DF7663</color>
+    <color name="Green_300">#21DC98</color>
+
+
+    <!-- Brown -->
+    <color name="Brown_200">#CC9B6D</color>
+    <color name="Brown_400">#3E2F2F</color>
+    <color name="Beige_200">#F1CA89</color>
+    <color name="gray_400">#C8C2BC</color>
+    <color name="Coffee_200">#CC9B6D</color>
 </resources>

@@ -2,7 +2,9 @@ package com.orangecoffeeapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private  val TAG = "MainActivity"
     override fun onCreate(savedInstanceState: Bundle?) {
