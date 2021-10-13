@@ -7,7 +7,7 @@
     android:layout_margin="@dimen/margin_medium"
     android:orientation="vertical"
     android:screenOrientation="portrait"
-    tools:context=".ui.useradmission.SignUpFragment">
+    tools:context=".ui.admin.AdminMainActivity">
 
     <FrameLayout
         android:id="@+id/parent"
@@ -60,7 +60,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_person_pin_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signUpFNameTxt"
+                    android:id="@+id/ownerFNameTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" />
@@ -80,7 +80,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_person_pin_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signUpLNameTxt"
+                    android:id="@+id/ownerLNameTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" />
@@ -100,7 +100,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_email_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signUpEmailTxt"
+                    android:id="@+id/ownerEmailTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true" />
@@ -121,7 +121,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_lock_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signUpPasswordTxt"
+                    android:id="@+id/ownerPasswordTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword"
@@ -142,7 +142,7 @@
                 app:startIconDrawable="@drawable/ic_baseline_local_phone_24">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/signUpPhoneTxt"
+                    android:id="@+id/ownerPhoneTxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="phone"
@@ -151,7 +151,7 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/signUpBtn"
+                android:id="@+id/addOwnerBtn"
                 style="@style/CustomButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -159,10 +159,12 @@
                 android:layout_marginTop="@dimen/margin_large"
                 android:layout_marginRight="@dimen/margin_xlarge"
                 android:padding="16dp"
-                android:text="SignUp"
+                android:text="Add Owner"
                 app:backgroundTint="@color/Brown_400" />
         </androidx.appcompat.widget.LinearLayoutCompat>
-
     </FrameLayout>
 
 </ScrollView>
+
+
+

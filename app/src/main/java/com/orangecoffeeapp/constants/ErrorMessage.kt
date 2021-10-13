@@ -16,6 +16,8 @@ object ErrorMessage {
     const val EMAIL_ALREADY_EXISTS_MSG = "Email already exists!"
     const val PHONE_ALREADY_EXISTS_MSG = "Phone already exists!"
     const val UNEXPECTED_ERROR_MSG = "Unexpected error!"
+    const val Error_UPDATE_NOT_AVAILABLE = "Update Unavailable!"
+    const val ERROR_NETWORK_ERROR = "Network Error"
     const val NONE = "No Error"
 
 

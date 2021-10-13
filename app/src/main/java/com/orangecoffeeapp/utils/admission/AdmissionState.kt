@@ -4,7 +4,7 @@ sealed class AdmissionState<out T> {
     //Success
     data class Success<out T>(val data:T): AdmissionState<T>()
     //Error
-    data class Error(val e:String): AdmissionState<Nothing>()
+    data class Error(var e:String): AdmissionState<Nothing>()
     //Idle
     object Idle: AdmissionState<Nothing>()
     //Loading

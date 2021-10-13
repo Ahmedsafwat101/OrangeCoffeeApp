@@ -5,7 +5,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:screenOrientation="portrait"
-    android:layout_margin="@dimen/margin_medium"
     tools:context=".ui.useradmission.LogInFragment">
 
     <FrameLayout
@@ -22,7 +21,7 @@
             android:indeterminate="true"
             android:indeterminateTint="@color/Brown_400"
             android:indeterminateTintMode="src_atop"
-            android:visibility="gone" />/>
+            android:visibility="gone" />
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"

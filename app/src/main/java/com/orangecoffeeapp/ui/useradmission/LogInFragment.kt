@@ -2,6 +2,9 @@ package com.orangecoffeeapp.ui.useradmission
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -9,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
@@ -19,13 +23,11 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_EMAIL_IS_EMPTY
 import com.orangecoffeeapp.constants.ErrorMessage.ERROR_EMAIL_NOT_VALID_MSG
 import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_IS_EMPTY
 import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_LENGTH_LESS_THAN_8
-import com.orangecoffeeapp.constants.ErrorMessage.NONE
-import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.data.models.LoginFormModel
-import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentLogInBinding
+import com.orangecoffeeapp.utils.SharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
-import com.orangecoffeeapp.utils.admission.LoginFormUtils
+import com.orangecoffeeapp.utils.admission.NavigateToActivity
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -33,7 +35,6 @@ class LogInFragment : Fragment() {
 
     private val TAG = "LogInFragment"
     private val admissionViewModel: AdmissionViewModel by viewModels()
-    //  private var editor = loginSharedPref?.edit()
 
     private lateinit var logInBinding: FragmentLogInBinding
 
@@ -48,15 +49,18 @@ class LogInFragment : Fragment() {
         return logInBinding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
-        //Applying Shared Presence
-        if (isLogged()) {
-            //val currUser = getSharedPreferenceData()
-            //navigateToHomeScreen(currUser.type)
-        }
 
-        subscribeObserver()
+        val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        val activeNetwork: NetworkInfo? = cm.activeNetworkInfo
+        val isConnected: Boolean = activeNetwork?.isConnectedOrConnecting == true
+
+        if(isConnected)
+            Log.d(TAG, "Connection $isConnected")
+        else
+            Log.d(TAG, "Connection false")
 
         // Access Views
 
@@ -64,11 +68,13 @@ class LogInFragment : Fragment() {
             findNavController().navigate(R.id.action_logInFragment_to_signUpFragment)
         }
 
+        subscribeObserver()
+
         //Check
         logInBinding.logInBtn.setOnClickListener {
             // If valid input return NONE
             it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
-            Log.d(TAG, "else before" + isLogged().toString())
+           // Log.d(TAG, "else before" + isLogged().toString())
 
             admissionViewModel.viewModelScope.launch {
                 admissionViewModel.logIn(
@@ -81,20 +87,15 @@ class LogInFragment : Fragment() {
         }
     }
 
-
+    @RequiresApi(Build.VERSION_CODES.M)
     private fun subscribeObserver() {
         admissionViewModel.getUser().observe(viewLifecycleOwner, { result ->
-            when (result) {
+            when (result){
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
                     //save in SharedPreference
-                    saveSharedPreferenceData(result.data)
-                    when (result.data.type) {
-                        UserTypes.Admin -> findNavController().navigate(R.id.action_logInFragment_to_adminHomeFragment)
-                        UserTypes.Customer -> findNavController().navigate(R.id.action_logInFragment_to_customerHomeFragment)
-                        UserTypes.Owner -> findNavController().navigate(R.id.action_logInFragment_to_ownerHomeFragment)
-                    }
-
+                   SharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
+                   startActivity(NavigateToActivity.moveToHomeActivity(result.data.type,requireActivity())) // Move to another activity
                 }
                 is AdmissionState.Loading -> {
                     displayProgressbar(true)
@@ -115,21 +116,18 @@ class LogInFragment : Fragment() {
                         ERROR_PASSWORD_LENGTH_LESS_THAN_8 -> {
                             logInBinding.loginInPasswordTxt.error = result.e
                         }
+
                     }
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")
-
-                    displaySnackbar(result.e)
                 }
             }
         })
     }
 
-
     private fun displayProgressbar(isDisplayed: Boolean) {
         logInBinding.progressCircular.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
-
 
     private fun displaySnackbar(error: String) {
         Snackbar.make(logInBinding.parent, error, Snackbar.LENGTH_LONG)
@@ -138,59 +136,5 @@ class LogInFragment : Fragment() {
             .show()
     }
 
-    private fun isLogged(): Boolean {
-        val loginSharedPref =
-            requireActivity().getSharedPreferences("loginRPref", Context.MODE_PRIVATE)
-        return loginSharedPref.getBoolean("logged", false)
-    }
 
-    private fun saveSharedPreferenceData(data: UserModel) {
-        var loginSharedPref =
-            requireActivity().getSharedPreferences("loginRPref", Context.MODE_PRIVATE)
-        val editor = loginSharedPref.edit()
-        editor.apply {
-            putString("fName", data.firstName)
-            putString("lName", data.lastName)
-            putString("email", data.email)
-            putString("password", data.password)
-            putString("phone", data.phone)
-            putBoolean("access", data.access)
-            putString("type", data.type)
-            putBoolean("logged", true)
-        }.apply()
-    }
-
-
-    private fun getSharedPreferenceData(): UserModel {
-        val loginSharedPref =
-            requireActivity().getSharedPreferences("loginRPref", Context.MODE_PRIVATE)
-
-        return UserModel(
-            firstName = loginSharedPref?.getString("fName", null).toString(),
-            lastName = loginSharedPref?.getString("lName", null).toString(),
-            email = loginSharedPref?.getString("email", null).toString(),
-            phone = loginSharedPref?.getString("phone", null).toString(),
-            access = loginSharedPref.getBoolean("access", false),
-            type = loginSharedPref?.getString("type", null).toString(),
-            password = loginSharedPref?.getString("password", null).toString(),
-        )
-    }
-
-
-    private fun navigateToHomeScreen(type: String) {
-        Log.d(TAG, "else navigateToHomeScreen" + type)
-        when (type) {
-            UserTypes.Admin -> {
-                Log.d(TAG, "else navigateToHomeScreen in in" + type)
-
-                findNavController().navigate(R.id.action_logInFragment_to_adminHomeFragment)
-            }
-            UserTypes.Customer -> findNavController().navigate(R.id.action_logInFragment_to_customerHomeFragment)
-            UserTypes.Owner -> findNavController().navigate(R.id.action_logInFragment_to_ownerHomeFragment)
-            else -> {
-                Log.d(TAG, "else nav" + type)
-
-            }
-        }
-    }
 }

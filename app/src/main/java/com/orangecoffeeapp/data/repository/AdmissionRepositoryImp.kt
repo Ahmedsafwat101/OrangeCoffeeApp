@@ -10,19 +10,20 @@ import java.lang.Exception
 import javax.inject.Inject
 
 
-class AdmissionRepositoryImp @Inject constructor(private val db:FirebaseFirestore):
+class AdmissionRepositoryImp @Inject constructor(private val db: FirebaseFirestore) :
     AdmissionRepository {
-    private  val TAG = "MyRepoImp"
-    override suspend fun validateUserLogin(user:LoginFormModel): UserModel? {
+    private val TAG = "MyRepoImp"
+    override suspend fun validateUserLogin(user: LoginFormModel): UserModel? {
         try {
             val hashedPassword = Hashing.sha256(user.password).toString()
             val dbKey = Hashing.sha256(user.email).toString() // hashed email
             val snapShot = db.collection("Users").document(dbKey).get().await()
+            Log.d(TAG, snapShot.data.toString())
             snapShot?.let {
                 return it.toObject(UserModel::class.java)
             }
 
-        }catch (e: Exception){
+        } catch (e: Exception) {
             Log.e(TAG, "Error: ${e.message}")
             return null
         }
@@ -30,9 +31,29 @@ class AdmissionRepositoryImp @Inject constructor(private val db:FirebaseFirestor
     }
 
     override suspend fun validateUserSignIn(user: UserModel): UserModel? {
-        TODO("Not yet implemented")
+        val dbKey = Hashing.sha256(user.email).toString() // hashed email
+        val snapShot = db.collection("Users").document(dbKey).get().await()
+        Log.d(TAG, "add " + snapShot.data.toString())
+
+        return if (!snapShot.exists()) {
+            db.collection("Users").document(dbKey).set(user).await()
+            Log.d(TAG, "Add Done")
+            user
+        } else {
+            null
+        }
+
     }
 
+    override suspend fun updateUser(user: UserModel): UserModel? {
 
-
+        val dbKey = Hashing.sha256(user.email).toString() // hashed email
+        val snapShot = db.collection("Users").document(dbKey).get().await()
+        return if(snapShot.exists()) {
+            db.collection("Users").document(dbKey).set(user).await()
+            user
+        }else{
+            null
+        }
+    }
 }
