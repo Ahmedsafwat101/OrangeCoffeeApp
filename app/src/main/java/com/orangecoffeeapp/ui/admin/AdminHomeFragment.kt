@@ -23,6 +23,7 @@ class AdminHomeFragment : Fragment() {
         return view
     }
 
+
     companion object {
 
     }

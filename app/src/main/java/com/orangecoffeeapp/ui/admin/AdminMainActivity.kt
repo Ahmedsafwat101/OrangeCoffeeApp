@@ -31,7 +31,7 @@ class AdminMainActivity : AppCompatActivity() {
          navHostFragment = supportFragmentManager.findFragmentById(R.id.adminFragmentContainerView) as NavHostFragment
          navController = navHostFragment.navController
         val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.adminHomeFragment,R.id.addNewCarFragment,R.id.analyticsFragment)
+            setOf(R.id.HomeFragment,R.id.addNewCarFragment,R.id.analyticsFragment)
         )
         setupActionBarWithNavController(navController,appBarConfiguration)
 
@@ -54,6 +54,10 @@ class AdminMainActivity : AppCompatActivity() {
 
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onBackPressed() {
+        finishAffinity()
     }
 
 }

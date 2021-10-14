@@ -7,21 +7,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
-import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentEditUserBinding
-import com.orangecoffeeapp.databinding.FragmentLogInBinding
 import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
 import com.orangecoffeeapp.utils.SharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+
 
 @AndroidEntryPoint
 class EditUser : Fragment() {
@@ -36,9 +32,11 @@ class EditUser : Fragment() {
         return editUserBinding.root
     }
 
+
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
         //Access View
         //Access SharedPreferenceManager
+
 
         val currUser = SharedPreferenceManager(requireActivity()).getSharedPreferenceData()
         setFields(currUser)
@@ -56,7 +54,7 @@ class EditUser : Fragment() {
                     phone =  editUserBinding.updatePhoneTxt.text.toString(),
                     password = editUserBinding.updatePasswordTxt.text.toString(),
                     email = currUser.email,
-                    access = true,
+                    access = currUser.access,
                     type = currUser.type
                 ))
             }
@@ -72,11 +70,11 @@ class EditUser : Fragment() {
     }
 
     private fun subscribeObserver() {
-        admissionViewModel.getUser().observe(viewLifecycleOwner, { result ->
+        admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    displaySnackbar("Data Updates Successfully! ", R.color.Green_300)
+                    displaySnackbar("Data Updates Successfully! ", com.orangecoffeeapp.R.color.Green_300)
                     SharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
 
                 }
@@ -105,7 +103,7 @@ class EditUser : Fragment() {
                         }
                     }
                     displayProgressbar(false)
-                    displaySnackbar(result.e, R.color.Red_200)
+                    displaySnackbar(result.e, com.orangecoffeeapp.R.color.Red_200)
 
                 }
             }
@@ -122,5 +120,16 @@ class EditUser : Fragment() {
             .setActionTextColor(resources.getColor(color))
             .show()
     }
+
+    /*override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }*/
+
 
 }

@@ -2,23 +2,19 @@ package com.orangecoffeeapp.ui.admin
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
-import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentAdminAddNewOwnerBinding
 import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
-import com.orangecoffeeapp.utils.SharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import android.view.*
+
 
 @AndroidEntryPoint
 class AddNewOwnerFragment : Fragment() {
@@ -31,12 +27,16 @@ class AddNewOwnerFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         addNewOwnerBinding = FragmentAdminAddNewOwnerBinding.inflate(inflater, container, false)
+
         return addNewOwnerBinding.root
     }
 
+
+
+
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //AccessView
-
         subscribeObserver()
 
         addNewOwnerBinding.addOwnerBtn.setOnClickListener {
@@ -59,11 +59,11 @@ class AddNewOwnerFragment : Fragment() {
     }
 
     private fun subscribeObserver() {
-        admissionViewModel.getUser().observe(viewLifecycleOwner, { result ->
+        admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    displaySnackbar("Owner is added Successfully! ", R.color.Green_300)
+                    displaySnackbar("Owner is added Successfully! ", com.orangecoffeeapp.R.color.green_300)
                 }
                 is AdmissionState.Loading -> {
                     displayProgressbar(true)
@@ -96,7 +96,7 @@ class AddNewOwnerFragment : Fragment() {
                         }
                     }
                     displayProgressbar(false)
-                    displaySnackbar(result.e, R.color.Red_200)
+                    displaySnackbar(result.e, com.orangecoffeeapp.R.color.green_300)
 
                 }
             }
@@ -115,6 +115,8 @@ class AddNewOwnerFragment : Fragment() {
         addNewOwnerBinding.progressCircular.visibility =
             if (isDisplayed) View.VISIBLE else View.GONE
     }
+
+
 
 
 }

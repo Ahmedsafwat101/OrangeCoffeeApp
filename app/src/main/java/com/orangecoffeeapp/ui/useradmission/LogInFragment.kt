@@ -14,7 +14,6 @@ import android.view.ViewGroup
 import androidx.annotation.Nullable
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +27,6 @@ import com.orangecoffeeapp.databinding.FragmentLogInBinding
 import com.orangecoffeeapp.utils.SharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import com.orangecoffeeapp.utils.admission.NavigateToActivity
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class LogInFragment : Fragment() {
@@ -76,7 +74,7 @@ class LogInFragment : Fragment() {
             it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
            // Log.d(TAG, "else before" + isLogged().toString())
 
-            admissionViewModel.viewModelScope.launch {
+
                 admissionViewModel.logIn(
                     LoginFormModel(
                         logInBinding.logInEmailTxt.text.toString().trim(),
@@ -85,11 +83,10 @@ class LogInFragment : Fragment() {
                 )
             }
         }
-    }
 
-    @RequiresApi(Build.VERSION_CODES.M)
+
     private fun subscribeObserver() {
-        admissionViewModel.getUser().observe(viewLifecycleOwner, { result ->
+        admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result){
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
@@ -101,7 +98,6 @@ class LogInFragment : Fragment() {
                     displayProgressbar(true)
                 }
                 is AdmissionState.Error -> {
-                    result
                     displayProgressbar(false)
                     when (result.e) {
                         ERROR_EMAIL_IS_EMPTY -> {
@@ -120,6 +116,9 @@ class LogInFragment : Fragment() {
                     }
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")
+                }
+                else -> {
+                    Log.d(TAG,"")
                 }
             }
         })

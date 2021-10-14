@@ -13,6 +13,7 @@ import javax.inject.Inject
 class AdmissionRepositoryImp @Inject constructor(private val db: FirebaseFirestore) :
     AdmissionRepository {
     private val TAG = "MyRepoImp"
+
     override suspend fun validateUserLogin(user: LoginFormModel): UserModel? {
         try {
             val hashedPassword = Hashing.sha256(user.password).toString()
@@ -30,9 +31,10 @@ class AdmissionRepositoryImp @Inject constructor(private val db: FirebaseFiresto
         return null
     }
 
-    override suspend fun validateUserSignIn(user: UserModel): UserModel? {
+    override suspend fun validateUserSignUp(user: UserModel): UserModel? {
         val dbKey = Hashing.sha256(user.email).toString() // hashed email
-        val snapShot = db.collection("Users").document(dbKey).get().await()
+        val snapShot = db.collection("Users").document(dbKey).get().
+        await()
         Log.d(TAG, "add " + snapShot.data.toString())
 
         return if (!snapShot.exists()) {
