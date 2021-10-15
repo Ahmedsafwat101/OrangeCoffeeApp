@@ -48,8 +48,8 @@ class AdminMainActivity : AppCompatActivity() {
         // Handle item selection
         return when (item.itemId) {
             R.id.updateProfile -> {
-                navController.navigate(R.id.action_HomeFragment_to_editUser)
-                true
+                //navController.navigate(R.id.action_global_editUser)
+                false
             }
 
             else -> super.onOptionsItemSelected(item)

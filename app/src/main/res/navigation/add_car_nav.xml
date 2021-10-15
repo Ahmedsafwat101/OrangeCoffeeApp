@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/add_car_nav"
+    app:startDestination="@id/addCarFragment">
+    <fragment
+        android:id="@+id/addCarFragment"
+        android:name="com.orangecoffeeapp.ui.addcar.AddCarFragment"
+        android:label="Add Car"
+        tools:layout="@layout/fragment_add_car" >
+        <action
+            android:id="@+id/action_addCarFragment_to_addInventoryFragment2"
+            app:destination="@id/addInventoryFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addInventoryFragment2"
+        android:name="com.orangecoffeeapp.ui.addcar.AddInventoryFragment"
+        android:label="Add Inventory"
+        tools:layout="@layout/fragment_add_inventory" >
+        <action
+            android:id="@+id/action_addInventoryFragment2_to_linkingFragment"
+            app:destination="@id/linkingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/linkingFragment"
+        android:name="com.orangecoffeeapp.ui.addcar.LinkingFragment"
+        android:label="Linking"
+        tools:layout="@layout/fragment_linking" />
+</navigation>

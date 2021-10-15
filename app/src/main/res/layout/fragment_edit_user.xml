@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.EditUser">
+    tools:context=".ui.edituser.EditUserFragment">
 
     <FrameLayout
         android:id="@+id/parent"
@@ -135,18 +135,9 @@
                 android:layout_marginLeft="@dimen/margin_xlarge"
                 android:layout_marginTop="@dimen/margin_xlarge"
                 android:layout_marginRight="@dimen/margin_xlarge"
-                android:padding="16dp"
                 android:text="@string/update"
                 app:backgroundTint="@color/Brown_400" />
-
-
-
         </androidx.appcompat.widget.LinearLayoutCompat>
-
     </FrameLayout>
-
-
-
-
 </ScrollView>
 

@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui
+package com.orangecoffeeapp.ui.edituser
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
-class EditUser : Fragment() {
+class EditUserFragment : Fragment() {
     private val admissionViewModel: AdmissionViewModel by viewModels()
     private lateinit var editUserBinding: FragmentEditUserBinding
     override fun onCreateView(
@@ -120,16 +121,4 @@ class EditUser : Fragment() {
             .setActionTextColor(resources.getColor(color))
             .show()
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }*/
-
-
 }

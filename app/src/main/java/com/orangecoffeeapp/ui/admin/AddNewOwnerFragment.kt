@@ -1,6 +1,8 @@
 package com.orangecoffeeapp.ui.admin
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
@@ -14,12 +16,21 @@ import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.view.*
+import com.orangecoffeeapp.R
+import com.orangecoffeeapp.ui.addcar.AddCarActivity
+import com.orangecoffeeapp.ui.edituser.EditUserActivity
 
 
 @AndroidEntryPoint
 class AddNewOwnerFragment : Fragment() {
+    private val TAG = "AddNewOwnerFragment"
     lateinit var addNewOwnerBinding: FragmentAdminAddNewOwnerBinding
     private val admissionViewModel: AdmissionViewModel by viewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,9 +41,6 @@ class AddNewOwnerFragment : Fragment() {
 
         return addNewOwnerBinding.root
     }
-
-
-
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -63,7 +71,9 @@ class AddNewOwnerFragment : Fragment() {
             when (result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    displaySnackbar("Owner is added Successfully! ", com.orangecoffeeapp.R.color.green_300)
+                    displaySnackbar("Owner is added Successfully! ", R.color.green_300)
+                    val intent = Intent(requireActivity(),AddCarActivity::class.java)
+                    startActivity(intent)
                 }
                 is AdmissionState.Loading -> {
                     displayProgressbar(true)
@@ -99,6 +109,9 @@ class AddNewOwnerFragment : Fragment() {
                     displaySnackbar(result.e, com.orangecoffeeapp.R.color.green_300)
 
                 }
+                else -> {
+                    Log.d(TAG,"Log else ")
+                }
             }
         })
 
@@ -114,6 +127,19 @@ class AddNewOwnerFragment : Fragment() {
     private fun displayProgressbar(isDisplayed: Boolean) {
         addNewOwnerBinding.progressCircular.visibility =
             if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+
+            R.id.updateProfile -> {
+                val intent = Intent(requireActivity(), EditUserActivity::class.java)
+                startActivity(intent)
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 
