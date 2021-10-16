@@ -22,6 +22,8 @@ object ErrorMessage {
     const val Error_Car_Address_IS_EMPTY = "Please enter car address!"
     const val Error_Car_Location_IS_EMPTY = "Please select location from map!"
     const val ERROR_CAR_ALREADY_EXISTS_MSG = "Car already exists!"
+    const val ERROR_INVENTORY_IS_EMPTY = "Please, Add some ingredients!"
+    const val ERROR_CANT_MAKE_COFFEE = "Please add coffee and water to be able to make coffee!"
 
     const val NONE = "No Error"
 

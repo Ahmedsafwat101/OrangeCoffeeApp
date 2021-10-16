@@ -1,7 +1,6 @@
 package com.orangecoffeeapp.ui.addcar
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.location.Address
 import android.location.Geocoder
@@ -16,7 +15,9 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -30,24 +31,24 @@ import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.databinding.FragmentAddCarBinding
-import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.CarSharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
-import com.orangecoffeeapp.utils.admission.NavigateToActivity
 import dagger.hilt.EntryPoint
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.*
 
 @AndroidEntryPoint
-class AddCarFragment : Fragment() , OnMapReadyCallback {
+class AddCarFragment : Fragment(), OnMapReadyCallback {
     private val TAG = "MapFragment"
     private lateinit var addCarBinding: FragmentAddCarBinding
-    private val addCarViewModel:AddCarViewModel by viewModels()
+    private val addCarViewModel: AddCarViewModel by viewModels()
 
-    var addressList: List<Address>? = null
+    private var addressList: List<Address>? = null
     lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
-    private var currLatLng = LatLng(0.0,0.0)
+    private var currLatLng:LatLng = LatLng(0.0,0.0)
+
 
     lateinit var searchView: SearchView
 
@@ -116,7 +117,6 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
     }
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, " MAP onViewCreated")
 
@@ -131,26 +131,28 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
             // If valid input return NONE
             it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
 
-            addCarViewModel.addCar(CarModel(
-                carName = addCarBinding.addCarNameTxt.text.toString(),
-                address = addCarBinding.addCarAddressTxt.text.toString(),
-                location = currLatLng
-            ))
+
+            if (addCarViewModel.validateAddCarFields(
+                    carName = addCarBinding.addCarNameTxt.text.toString(),
+                    address = addCarBinding.addCarAddressTxt.text.toString(),
+                    location = currLatLng
+                )
+            ){
+                CarSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(CarModel(
+                    carName = addCarBinding.addCarNameTxt.text.toString(),
+                    address = addCarBinding.addCarAddressTxt.text.toString(),
+                    location = currLatLng
+                    )
+                )
+                findNavController().navigate(R.id.action_addCarFragment_to_addInventoryFragment)
+            }
         }
     }
 
 
     private fun subscribeObserver() {
         addCarViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
-            when (result){
-                is AdmissionState.Success -> {
-                    displayProgressbar(false)
-                    displaySnackbar("Car is added Successfully! ", R.color.Green_300)
-                    // Process To Inventory
-                }
-                is AdmissionState.Loading -> {
-                    displayProgressbar(true)
-                }
+            when (result) {
                 is AdmissionState.Error -> {
                     displayProgressbar(false)
                     when (result.e) {
@@ -165,7 +167,7 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                     Log.d("here", "Error ${result.e}")
                 }
                 else -> {
-                    Log.d(TAG,"")
+                    Log.d(TAG, "")
                 }
             }
         })
@@ -181,7 +183,6 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
             .setActionTextColor(resources.getColor(color))
             .show()
     }
-
 
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -201,7 +202,7 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
 
     // Called when user makes a long press gesture on the map.
     private fun setMapClick(map: GoogleMap) {
-        Log.d(TAG," MAP setMapClick")
+        Log.d(TAG, " MAP setMapClick")
 
 
         map.setOnMapClickListener { latLng ->
@@ -215,11 +216,13 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                     .position(latLng)
                     .title(getString(R.string.dropped_pin))
                     .snippet(snippet)
-                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))       }
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+            )
+        }
 
     }
 
-    private fun makeSnippet(latLng:LatLng):String?{
+    private fun makeSnippet(latLng: LatLng): String? {
         return String.format(
             Locale.getDefault(),
             "Lat: %1$.5f, Long: %2$.5f",
@@ -231,7 +234,7 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
 
     // Places a marker on the map and displays an info window that contains POI name.
     private fun setPoiClick(map: GoogleMap) {
-        Log.d(TAG," MAP setPoiClick")
+        Log.d(TAG, " MAP setPoiClick")
 
         map.setOnPoiClickListener { poi ->
             val poiMarker = map.addMarker(
@@ -244,10 +247,11 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
     }
 
     // Checks that users have given permission
-    private fun isPermissionGranted() : Boolean {
+    private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
             requireActivity(),
-            Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     // Checks if users have given their location and sets location enabled if so.
@@ -270,8 +274,7 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                 return
             }
             map.isMyLocationEnabled = true
-        }
-        else {
+        } else {
             ActivityCompat.requestPermissions(
                 requireActivity(),
                 arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
@@ -286,7 +289,8 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
-        grantResults: IntArray) {
+        grantResults: IntArray
+    ) {
         // Check if location permissions are granted and if so enable the
         // location data layer.
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
@@ -300,5 +304,6 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
     private fun getActionBar(): ActionBar? {
         return (activity as AddCarActivity).supportActionBar
     }
+
 
 }

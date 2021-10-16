@@ -10,18 +10,18 @@
         android:label="Add Car"
         tools:layout="@layout/fragment_add_car" >
         <action
-            android:id="@+id/action_addCarFragment_to_addInventoryFragment2"
-            app:destination="@id/addInventoryFragment2" />
+            android:id="@+id/action_addCarFragment_to_addInventoryFragment"
+            app:destination="@id/addInventoryFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/addInventoryFragment2"
+    <dialog
+        android:id="@+id/addInventoryFragment"
         android:name="com.orangecoffeeapp.ui.addcar.AddInventoryFragment"
         android:label="Add Inventory"
         tools:layout="@layout/fragment_add_inventory" >
         <action
-            android:id="@+id/action_addInventoryFragment2_to_linkingFragment"
+            android:id="@+id/action_addInventoryFragment_to_linkingFragment"
             app:destination="@id/linkingFragment" />
-    </fragment>
+    </dialog>
     <fragment
         android:id="@+id/linkingFragment"
         android:name="com.orangecoffeeapp.ui.addcar.LinkingFragment"

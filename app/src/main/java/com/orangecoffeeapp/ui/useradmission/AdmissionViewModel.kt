@@ -34,8 +34,6 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
     fun getUserStates() = userStates
 
 
-
-
     fun logIn(data: Any) {
         userStates.postValue(AdmissionState.Loading)
         val currUser = data as LoginFormModel

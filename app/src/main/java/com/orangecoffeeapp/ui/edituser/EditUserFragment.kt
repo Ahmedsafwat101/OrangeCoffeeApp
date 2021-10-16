@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.viewModelScope
 import com.google.android.material.snackbar.Snackbar
@@ -14,7 +13,7 @@ import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentEditUserBinding
 import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
-import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.UserSharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -39,7 +38,7 @@ class EditUserFragment : Fragment() {
         //Access SharedPreferenceManager
 
 
-        val currUser = SharedPreferenceManager(requireActivity()).getSharedPreferenceData()
+        val currUser = UserSharedPreferenceManager(requireActivity()).getSharedPreferenceData()
         setFields(currUser)
 
         subscribeObserver()
@@ -76,7 +75,7 @@ class EditUserFragment : Fragment() {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
                     displaySnackbar("Data Updates Successfully! ", com.orangecoffeeapp.R.color.Green_300)
-                    SharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
+                    UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
 
                 }
                 is AdmissionState.Loading -> {

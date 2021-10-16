@@ -8,6 +8,7 @@ import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.repository.AddCarRepository
 import com.orangecoffeeapp.utils.addcar.AddCarFormUtils
+import com.orangecoffeeapp.utils.addcar.AddInventoryUtils
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -26,7 +27,7 @@ class AddCarViewModel @Inject constructor(private val repo: AddCarRepository) : 
     fun addCar(data: Any) {
         carStates.postValue(AdmissionState.Loading)
         val currCar = data as CarModel
-        if (validateAddCarFields(currCar.carName, currCar.address, currCar.location)) {
+        if (validateInventoryFields(currCar.inventory.coffeeBeans,currCar.inventory.milk,currCar.inventory.water,currCar.inventory.sugar)) {
             viewModelScope.launch(Dispatchers.IO) {
                 val response = repo.addCarToDB(currCar)
                 if (response != null) {
@@ -38,7 +39,17 @@ class AddCarViewModel @Inject constructor(private val repo: AddCarRepository) : 
         }
     }
 
-    private fun validateAddCarFields(carName: String, address: String, location: LatLng): Boolean {
+
+    private fun validateInventoryFields(coffee:Int, milk:Int, water:Int, sugar:Int):Boolean{
+        val result = AddInventoryUtils.validateAddItemForm(coffee, milk, water,sugar)
+        if (result != ErrorMessage.NONE) {
+            carStates.postValue(AdmissionState.Error(result))
+            return false
+        }
+        return true
+    }
+
+     fun validateAddCarFields(carName: String, address: String, location: LatLng): Boolean {
         val result = AddCarFormUtils.validateAddCarForm(carName, address, location)
         if (result != ErrorMessage.NONE) {
             carStates.postValue(AdmissionState.Error(result))

@@ -15,7 +15,7 @@ import com.orangecoffeeapp.databinding.FragmentSignUpBinding
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.UserTypes
-import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.UserSharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -62,7 +62,7 @@ class SignUpFragment : Fragment() {
             when(result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    SharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
+                    UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
                    // findNavController().navigate(R.id.action_signUpFragment_to_adminHomeFragment)
 
                 }

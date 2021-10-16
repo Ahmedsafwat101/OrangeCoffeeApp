@@ -6,11 +6,8 @@ import com.google.common.truth.Truth
 import com.orangecoffeeapp.MainCoroutineRule
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
-import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.FakeAddCarRepositoryTest
-import com.orangecoffeeapp.data.repository.FakeAdmissionRepositoryImplTest
 import com.orangecoffeeapp.getOrAwaitValueTest
-import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import org.junit.Before
 import org.junit.Rule
@@ -19,7 +16,7 @@ import org.junit.rules.TestRule
 
 class AddCarViewModelTest{
 
-    // I already check the validation of the input in AddCatFormUtilsTest under Test module 
+    // I already check the validation of the input in AddCatFormUtilsTest under Test module
 
     private lateinit var addCarViewModel: AddCarViewModel
 

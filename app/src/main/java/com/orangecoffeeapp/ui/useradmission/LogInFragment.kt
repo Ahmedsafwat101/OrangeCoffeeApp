@@ -1,10 +1,8 @@
 package com.orangecoffeeapp.ui.useradmission
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.Nullable
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
@@ -24,7 +21,7 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_IS_EMPTY
 import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_LENGTH_LESS_THAN_8
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.databinding.FragmentLogInBinding
-import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.UserSharedPreferenceManager
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import com.orangecoffeeapp.utils.admission.NavigateToActivity
 
@@ -89,7 +86,7 @@ class LogInFragment : Fragment() {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
                     //save in SharedPreference
-                   SharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
+                   UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
                    startActivity(NavigateToActivity.moveToHomeActivity(result.data.type,requireActivity())) // Move to another activity
                 }
                 is AdmissionState.Loading -> {

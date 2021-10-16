@@ -2,17 +2,16 @@ package com.orangecoffeeapp.ui.useradmission
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import com.orangecoffeeapp.R
-import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.UserSharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-    lateinit var sharedPref: SharedPreferenceManager
+    lateinit var userSharedPref: UserSharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -27,10 +26,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkSharedPreference(){
-        sharedPref = SharedPreferenceManager(applicationContext)
+        userSharedPref = UserSharedPreferenceManager(applicationContext)
 
-        if (sharedPref.isLogged()) {
-            val currUser = sharedPref.getSharedPreferenceData()
+        if (userSharedPref.isLogged()) {
+            val currUser = userSharedPref.getSharedPreferenceData()
             startActivity(
                 com.orangecoffeeapp.utils.admission.NavigateToActivity.moveToHomeActivity(
                     currUser.type,

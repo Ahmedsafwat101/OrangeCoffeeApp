@@ -5,7 +5,7 @@ import com.orangecoffeeapp.data.models.UserModel
 import android.content.SharedPreferences
 
 
-class SharedPreferenceManager(context: Context) {
+class UserSharedPreferenceManager(context: Context) {
 
     private val userSharedPref: SharedPreferences = context.getSharedPreferences("loginRPref", Context.MODE_PRIVATE)
     private val editor: SharedPreferences.Editor = userSharedPref.edit()
