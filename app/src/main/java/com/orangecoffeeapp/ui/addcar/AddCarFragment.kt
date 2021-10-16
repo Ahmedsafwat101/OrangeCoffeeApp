@@ -13,8 +13,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.viewModels
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -23,44 +25,43 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MapStyleOptions
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.R
+import com.orangecoffeeapp.constants.ErrorMessage
+import com.orangecoffeeapp.data.models.CarModel
+import com.orangecoffeeapp.databinding.FragmentAddCarBinding
+import com.orangecoffeeapp.utils.SharedPreferenceManager
+import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.admission.NavigateToActivity
+import dagger.hilt.EntryPoint
+import dagger.hilt.android.AndroidEntryPoint
 import java.io.IOException
 import java.util.*
 
-
+@AndroidEntryPoint
 class AddCarFragment : Fragment() , OnMapReadyCallback {
     private val TAG = "MapFragment"
+    private lateinit var addCarBinding: FragmentAddCarBinding
+    private val addCarViewModel:AddCarViewModel by viewModels()
 
     var addressList: List<Address>? = null
     lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
+    private var currLatLng = LatLng(0.0,0.0)
 
     lateinit var searchView: SearchView
-
-    override fun onMapReady(googleMap: GoogleMap) {
-        Log.d(TAG, " MAP oNonMapReadym")
-        map = googleMap
-        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireActivity(), R.raw.style_json))
-        val Egypt = LatLng(30.0444196, 31.2357116)
-        map.animateCamera(CameraUpdateFactory.newLatLngZoom(Egypt, 15f))
-
-        setMapClick(map)
-        //setMapLongClick(map)
-        setPoiClick(map)
-        //setMapStyle(map)
-        enableMyLocation()
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val view = inflater.inflate(R.layout.fragment_add_car, container, false)
 
+        addCarBinding = FragmentAddCarBinding.inflate(inflater, container, false)
 
+        getActionBar()?.title = "Add Car"
 
-        searchView = view.findViewById(R.id.searchBar)
+        searchView = addCarBinding.searchBar
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(location: String?): Boolean {
                 if (location == null || location == "") {
@@ -84,6 +85,8 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                     }
                     val address = addressList!![0]
                     val latLng = LatLng(address.latitude, address.longitude)
+                    currLatLng = latLng
+                    addCarBinding.addCarAddressTxt.setText(location)
 
                     Log.d("Lan", "Lang" + address.latitude + "," + address.longitude)
 
@@ -109,8 +112,10 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
             }
         })
 
-        return view
+        return addCarBinding.root
     }
+
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         Log.d(TAG, " MAP onViewCreated")
@@ -120,16 +125,77 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
 
         mapFragment.getMapAsync(this)
 
+        subscribeObserver()
+
+        addCarBinding.addCarBtn.setOnClickListener {
+            // If valid input return NONE
+            it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
+
+            addCarViewModel.addCar(CarModel(
+                carName = addCarBinding.addCarNameTxt.text.toString(),
+                address = addCarBinding.addCarAddressTxt.text.toString(),
+                location = currLatLng
+            ))
+        }
     }
 
-    private fun addMarker(latLng: LatLng,snippet:String?){
-        map.addMarker(
-            MarkerOptions()
-                .position(latLng)
-                .title(getString(R.string.dropped_pin))
-                .snippet(snippet)
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)))
 
+    private fun subscribeObserver() {
+        addCarViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
+            when (result){
+                is AdmissionState.Success -> {
+                    displayProgressbar(false)
+                    displaySnackbar("Car is added Successfully! ", R.color.Green_300)
+                    // Process To Inventory
+                }
+                is AdmissionState.Loading -> {
+                    displayProgressbar(true)
+                }
+                is AdmissionState.Error -> {
+                    displayProgressbar(false)
+                    when (result.e) {
+                        ErrorMessage.Error_Car_NAME_IS_EMPTY -> {
+                            addCarBinding.addCarNameTxt.error = result.e
+                        }
+                        ErrorMessage.Error_Car_Address_IS_EMPTY -> {
+                            addCarBinding.addCarAddressTxt.error = result.e
+                        }
+                    }
+                    displaySnackbar(result.e, R.color.Red_200)
+                    Log.d("here", "Error ${result.e}")
+                }
+                else -> {
+                    Log.d(TAG,"")
+                }
+            }
+        })
+    }
+
+    private fun displayProgressbar(isDisplayed: Boolean) {
+        addCarBinding.progressCircular.visibility = if (isDisplayed) View.VISIBLE else View.GONE
+    }
+
+    private fun displaySnackbar(message: String, color: Int) {
+        Snackbar.make(addCarBinding.parent, message, Snackbar.LENGTH_LONG)
+            .setAction("CLOSE") { }
+            .setActionTextColor(resources.getColor(color))
+            .show()
+    }
+
+
+
+    override fun onMapReady(googleMap: GoogleMap) {
+        Log.d(TAG, " MAP oNonMapReadym")
+        map = googleMap
+        map.setMapStyle(MapStyleOptions.loadRawResourceStyle(requireActivity(), R.raw.style_json))
+        val Egypt = LatLng(30.0444196, 31.2357116)
+        map.animateCamera(CameraUpdateFactory.newLatLngZoom(Egypt, 15f))
+
+        setMapClick(map)
+        //setMapLongClick(map)
+        setPoiClick(map)
+        //setMapStyle(map)
+        enableMyLocation()
     }
 
 
@@ -139,6 +205,7 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
 
 
         map.setOnMapClickListener { latLng ->
+            currLatLng = latLng
             val snippet = makeSnippet(latLng)
 
             map.clear()
@@ -184,7 +251,6 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
     }
 
     // Checks if users have given their location and sets location enabled if so.
-    @SuppressLint("MissingPermission")
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
             if (ActivityCompat.checkSelfPermission(
@@ -198,10 +264,9 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                 // TODO: Consider calling
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
+                /*fun onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
+
+                }*/
                 return
             }
             map.isMyLocationEnabled = true
@@ -229,6 +294,11 @@ class AddCarFragment : Fragment() , OnMapReadyCallback {
                 enableMyLocation()
             }
         }
+    }
+
+
+    private fun getActionBar(): ActionBar? {
+        return (activity as AddCarActivity).supportActionBar
     }
 
 }

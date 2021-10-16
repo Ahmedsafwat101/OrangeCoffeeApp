@@ -18,6 +18,11 @@ object ErrorMessage {
     const val UNEXPECTED_ERROR_MSG = "Unexpected error!"
     const val Error_UPDATE_NOT_AVAILABLE = "Update Unavailable!"
     const val ERROR_NETWORK_ERROR = "Network Error"
+    const val Error_Car_NAME_IS_EMPTY = "Please enter car name!"
+    const val Error_Car_Address_IS_EMPTY = "Please enter car address!"
+    const val Error_Car_Location_IS_EMPTY = "Please select location from map!"
+    const val ERROR_CAR_ALREADY_EXISTS_MSG = "Car already exists!"
+
     const val NONE = "No Error"
 
 

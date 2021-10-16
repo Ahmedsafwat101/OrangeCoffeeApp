@@ -1,31 +1,136 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:screenOrientation="portrait"
     tools:context=".ui.addcar.AddCarFragment">
 
-    <SearchView
-        android:id="@+id/searchBar"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="1" />
+    <FrameLayout
+        android:id="@+id/parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="ExtraText">
+
+        <ProgressBar
+            android:id="@+id/progress_circular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/Brown_400"
+            android:indeterminateTintMode="src_atop"
+            android:visibility="gone" />
 
 
-    <fragment
-        android:id="@+id/map"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintHeight_percent="0.6"
-        app:layout_constraintWidth_percent="1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/searchBar"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        tools:context=".MainActivity" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/addCarPic"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/margin_xlarge"
+                android:padding="5dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/logo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.App.CornerSize50Percent"
+                app:strokeColor="@color/Coffee_200"
+                app:strokeWidth="2dp" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/InputEditTextCustomStyle.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_xlarge"
+                android:layout_marginRight="@dimen/margin_xlarge"
+                android:hint="@string/car_name"
+                android:maxLines="1"
+                app:boxStrokeColor="@color/Brown_400"
+                app:hintTextColor="@color/Brown_400"
+                app:startIconDrawable="@drawable/ic_baseline_person_pin_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addCarNameTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/InputEditTextCustomStyle.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_xlarge"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_xlarge"
+                android:hint="Address"
+                android:maxLines="1"
+                app:boxStrokeColor="@color/Brown_400"
+                app:hintTextColor="@color/Brown_400"
+                app:startIconDrawable="@drawable/ic_sharp_add_location_alt_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/addCarAddressTxt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPostalAddress"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <SearchView
+                android:id="@+id/searchBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:outlineAmbientShadowColor="@color/Brown_200"
+                android:queryHint="Location"
+                android:layout_marginLeft="@dimen/margin_xlarge"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_xlarge" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_xlarge"
+                android:layout_marginRight="@dimen/margin_xlarge"
+                app:cardCornerRadius="15dp">
+
+                <fragment
+                    android:id="@+id/map"
+                    android:name="com.google.android.gms.maps.SupportMapFragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/addCarBtn"
+                style="@style/CustomButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_xlarge"
+                android:layout_marginTop="@dimen/margin_large"
+                android:layout_marginRight="@dimen/margin_xlarge"
+                android:layout_marginBottom="@dimen/margin_large"
+                android:text="Add Car"
+                app:backgroundTint="@color/Brown_400" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </FrameLayout>
+</ScrollView>

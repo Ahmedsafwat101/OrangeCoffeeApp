@@ -15,4 +15,22 @@
         <item name="android:textSize">24dp</item>
         <item name="android:padding">8dp</item>
     </style>
+
+    <style name="Coffee.SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <!-- Custom values write to here for SearchEditText. -->
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+        <item name="android:enabled">true</item>
+        <item name="tint">@color/Coffee_200</item>
+        <item name="android:hint">Search</item>
+        <item name="android:imeOptions">actionSearch</item>
+    </style>
+
+
+
+
+
+
+
+
 </resources>

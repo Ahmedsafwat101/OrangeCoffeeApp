@@ -22,6 +22,7 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="dropped_pin">Pin</string>
     <string name="google_map_api_key">AIzaSyCWZPdCn32rWzao5d5Mzb3pHJ0lewuJaXY</string>
+    <string name="car_name">Car Name</string>
 
 
 </resources>

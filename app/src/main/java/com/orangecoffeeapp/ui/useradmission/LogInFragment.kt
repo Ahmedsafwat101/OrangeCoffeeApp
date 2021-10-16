@@ -47,8 +47,6 @@ class LogInFragment : Fragment() {
         return logInBinding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.M)
-    @SuppressLint("UseRequireInsteadOfGet")
     override fun onViewCreated(view: View, @Nullable savedInstanceState: Bundle?) {
 
         val cm = context?.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

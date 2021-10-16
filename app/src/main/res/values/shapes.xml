@@ -25,8 +25,8 @@
         <item name="cornerFamily">rounded</item>
         <item name="cornerSizeTopLeft">50%</item>
         <item name="cornerSizeTopRight">50%</item>
-        <item name="cornerSizeBottomLeft">0%</item>
-        <item name="cornerSizeBottomRight">0%</item>
+        <item name="cornerSizeBottomLeft">50%</item>
+        <item name="cornerSizeBottomRight">50%</item>
     </style>
 
     <style name="Coffee.ShapeAppearance.Button" parent="ShapeAppearance.MaterialComponents.SmallComponent">

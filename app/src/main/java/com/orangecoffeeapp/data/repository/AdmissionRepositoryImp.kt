@@ -33,8 +33,7 @@ class AdmissionRepositoryImp @Inject constructor(private val db: FirebaseFiresto
 
     override suspend fun validateUserSignUp(user: UserModel): UserModel? {
         val dbKey = Hashing.sha256(user.email).toString() // hashed email
-        val snapShot = db.collection("Users").document(dbKey).get().
-        await()
+        val snapShot = db.collection("Users").document(dbKey).get().await()
         Log.d(TAG, "add " + snapShot.data.toString())
 
         return if (!snapShot.exists()) {
