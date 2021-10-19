@@ -91,33 +91,6 @@
             </com.google.android.material.textfield.TextInputLayout>
 
 
-            <SearchView
-                android:id="@+id/searchBar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:outlineAmbientShadowColor="@color/Brown_200"
-                android:queryHint="Location"
-                android:layout_marginLeft="@dimen/margin_xlarge"
-                android:layout_marginTop="@dimen/margin_large"
-                android:layout_marginRight="@dimen/margin_xlarge" />
-
-
-            <com.google.android.material.card.MaterialCardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/margin_xlarge"
-                android:layout_marginRight="@dimen/margin_xlarge"
-                app:cardCornerRadius="15dp">
-
-                <fragment
-                    android:id="@+id/map"
-                    android:name="com.google.android.gms.maps.SupportMapFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/addCarBtn"
                 style="@style/CustomButton"

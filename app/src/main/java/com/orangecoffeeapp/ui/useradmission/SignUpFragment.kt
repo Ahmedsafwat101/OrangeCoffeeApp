@@ -62,6 +62,7 @@ class SignUpFragment : Fragment() {
             when(result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
+                    requireActivity().finish()
                     UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
                    // findNavController().navigate(R.id.action_signUpFragment_to_adminHomeFragment)
 

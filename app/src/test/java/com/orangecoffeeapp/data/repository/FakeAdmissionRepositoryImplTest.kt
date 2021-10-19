@@ -15,7 +15,8 @@ class FakeAdmissionRepositoryImplTest : AdmissionRepository {
             "123456789",
             "01126638220",
             "Customer",
-            true,
+            "",
+            true
         ),
         Hashing.sha256("ahmedsafwat2@gmail.com").toString() to UserModel(
             "Ahmed",
@@ -24,7 +25,8 @@ class FakeAdmissionRepositoryImplTest : AdmissionRepository {
             "123456789",
             "01126638220",
             "Customer",
-            false,
+            "",
+            true
         )
     )
 

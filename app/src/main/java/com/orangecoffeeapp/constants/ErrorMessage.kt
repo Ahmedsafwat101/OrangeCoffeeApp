@@ -24,6 +24,12 @@ object ErrorMessage {
     const val ERROR_CAR_ALREADY_EXISTS_MSG = "Car already exists!"
     const val ERROR_INVENTORY_IS_EMPTY = "Please, Add some ingredients!"
     const val ERROR_CANT_MAKE_COFFEE = "Please add coffee and water to be able to make coffee!"
+    const val ERROR_NO_OWNERS_FOUND = "Please add Owner to be able to Link!"
+    const val ERROR_NO_CAR_FOUND = "Please add Car to be able to Link!"
+    const val ERROR_NO_OWNER_SELECTED = "Please select an owner!"
+    const val ERROR_NO_CAR_SELECTED = "Please select a car !"
+    const val ERROR_OWNER_OR_CAR_NOT_EXISTS = "Refresh your data "
+
 
     const val NONE = "No Error"
 

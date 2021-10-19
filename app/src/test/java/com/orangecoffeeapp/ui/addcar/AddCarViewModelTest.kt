@@ -39,7 +39,8 @@ class AddCarViewModelTest{
         val car = CarModel(
             carName = "Car1",
             address = "Cairo,Maddi",
-            location = LatLng(29.9601561,31.2569138)
+            latitude = 29.9601561,
+            longitude = 31.2569138
         )
 
         addCarViewModel.addCarTest(car)
@@ -56,7 +57,8 @@ class AddCarViewModelTest{
         val car = CarModel(
             carName = "Car2",
             address = "Cairo,Maddi",
-            location = LatLng(29.9601561,31.2569138)
+            latitude = 29.9601561,
+            longitude = 31.2569138
         )
 
         addCarViewModel.addCarTest(car)

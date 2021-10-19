@@ -8,5 +8,6 @@ data class UserModel(
     var password: String="",
     var phone: String= "",
     var type:String="",
+    var carID:String="",
     var access:Boolean = true
 )

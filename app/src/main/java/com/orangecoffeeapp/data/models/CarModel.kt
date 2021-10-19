@@ -9,9 +9,10 @@ data class CarModel(
     var carName: String ="",
     var ownerID: String ="",
     var address: String ="",
-    var location: LatLng = LatLng(0.0,0.0),
+    var latitude:Double=0.0,
+    var longitude:Double = 0.0,
     var menu: List<MenuModel> = listOf(),
     var inventory: InventoryItemModel = InventoryItemModel(),
     var active: Boolean = true,
     var isTaken:Boolean = false
-):Serializable
+)

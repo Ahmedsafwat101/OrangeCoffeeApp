@@ -22,8 +22,16 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
 
 
-         checkSharedPreference()
+        // checkSharedPreference()
     }
+
+    /*override fun onResume() {
+        super.onResume()
+        if (ExitHelper.isExitFlagRaised) {
+           // ExitHelper.isExitFlagRaised = true
+            finish()
+        }
+    }*/
 
     private fun checkSharedPreference(){
         userSharedPref = UserSharedPreferenceManager(applicationContext)

@@ -23,7 +23,7 @@ class LoginFormUtilsTest{
 
     @Test
     fun`empty password return false`(){
-        val result = LoginFormUtils.validateLoginForm("ahmedsafwat@172@gmail.com","")
+        val result = LoginFormUtils.validateLoginForm("ahmedsafwat172@gmail.com","")
         assertThat(result).isEqualTo(ErrorMessage.ERROR_PASSWORD_IS_EMPTY)
     }
 

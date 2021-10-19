@@ -43,7 +43,8 @@ class AdmissionViewModelTest {
             "123456789",
             "01126638220",
             "Customer",
-            true,
+            "",
+            true
         )
 
 
@@ -68,7 +69,8 @@ class AdmissionViewModelTest {
             "123456789",
             "01126638220",
             "Customer",
-            true,
+            "",
+            true
         )
 
         admissionViewModel.signUpTest(user)
@@ -96,7 +98,8 @@ class AdmissionViewModelTest {
             "123456789",
             "01126638220",
             "Customer",
-            false,
+            "",
+            true
         )
 
         admissionViewModel.logInTest(userLoginModel)
@@ -150,7 +153,8 @@ class AdmissionViewModelTest {
             "123456789",
             "01126638330",
             "Customer",
-            true,
+            "",
+            true
 
         )
 
@@ -173,7 +177,8 @@ class AdmissionViewModelTest {
             "123456789",
             "01126638330",
             "Customer",
-            false,
+            "",
+            false
 
             )
 

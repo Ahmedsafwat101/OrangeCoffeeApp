@@ -47,6 +47,7 @@
     <!-- Black -->
     <color name="blue_100">#168aad</color>
     <color name="blue_700">#0A3040</color>
+    <color name="black_blue">#1d2c4d</color>
 
 
     <color name="Blue_200">#06224A</color>

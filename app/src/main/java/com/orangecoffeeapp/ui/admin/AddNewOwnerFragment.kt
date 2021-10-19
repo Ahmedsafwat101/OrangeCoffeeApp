@@ -71,7 +71,7 @@ class AddNewOwnerFragment : Fragment() {
             when (result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    displaySnackbar("Owner is added Successfully! ", R.color.green_300)
+                   // displaySnackbar("Owner is added Successfully! ", R.color.green_300)
                     val intent = Intent(requireActivity(),AddCarActivity::class.java)
                     startActivity(intent)
                 }
@@ -117,6 +117,7 @@ class AddNewOwnerFragment : Fragment() {
 
     }
 
+    //Update to Toast
     private fun displaySnackbar(message: String, color: Int) {
         Snackbar.make(addNewOwnerBinding.parent, message, Snackbar.LENGTH_LONG)
             .setAction("CLOSE") { }

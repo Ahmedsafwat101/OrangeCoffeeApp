@@ -12,7 +12,7 @@ import javax.inject.Inject
 class AddCarRepositoryImp @Inject constructor(private val db: FirebaseFirestore):AddCarRepository {
     private  val TAG = "AddCarRepositoryImp"
 
-    override suspend fun addCarToDB(car: CarModel): CarModel? {
+    override suspend fun addCar(car: CarModel): CarModel? {
         val dbKey = car.carName
         val snapShot = db.collection("Cars").document(dbKey).get().await()
         Log.d(TAG, "add " + snapShot.data.toString())
@@ -26,11 +26,11 @@ class AddCarRepositoryImp @Inject constructor(private val db: FirebaseFirestore)
         }
     }
 
-    override suspend fun removeCarFromBB(car: CarModel): CarModel? {
+    override suspend fun removeCar(car: CarModel): CarModel? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateCarFromDB(car: CarModel): CarModel? {
+    override suspend fun updateCar(car: CarModel): CarModel? {
         TODO("Not yet implemented")
     }
 }

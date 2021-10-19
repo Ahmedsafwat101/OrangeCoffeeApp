@@ -13,8 +13,8 @@ class CarSharedPreferenceManager(context: Context) {
         editor.apply {
             putString("carName", data.carName)
             putString("carAddress", data.address)
-            putFloat("latitude", data.location.latitude.toFloat())
-            putFloat("longitude", data.location.longitude.toFloat())
+            putFloat("latitude", data.latitude.toFloat())
+            putFloat("longitude", data.longitude.toFloat())
             putBoolean("active", data.active)
             putBoolean("isTaken", data.isTaken)
         }.apply()
@@ -25,7 +25,8 @@ class CarSharedPreferenceManager(context: Context) {
         return CarModel(
             carName = carSharedPref.getString("carName", null).toString(),
             address = carSharedPref.getString("carAddress", null).toString(),
-            location = LatLng( carSharedPref.getFloat("latitude", 0f).toDouble(), carSharedPref.getFloat("longitude", 0f).toDouble() ),
+            latitude = carSharedPref.getFloat("latitude", 0f).toDouble(),
+            longitude = carSharedPref.getFloat("longitude", 0f).toDouble() ,
             active = carSharedPref.getBoolean("active", false),
             isTaken = carSharedPref.getBoolean("isTaken", false) ,
         )

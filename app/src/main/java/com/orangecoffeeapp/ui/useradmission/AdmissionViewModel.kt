@@ -31,6 +31,7 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
     private val TAG = "MyViewModel"
     private val userStates = MutableLiveData<AdmissionState<UserModel>>()
 
+
     fun getUserStates() = userStates
 
 
@@ -89,7 +90,9 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
     }
 
 
-     fun validateLoginFields(email: String, password: String): Boolean {
+
+
+     private fun validateLoginFields(email: String, password: String): Boolean {
         val result = LoginFormUtils.validateLoginForm(email, password)
         if (result != ErrorMessage.NONE) {
             userStates.postValue(AdmissionState.Error(result))

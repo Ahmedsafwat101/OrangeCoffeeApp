@@ -11,11 +11,12 @@ class FakeAddCarRepositoryTest:AddCarRepository {
         "Car1" to CarModel(
           carName = "Car1",
           address = "Cairo,Maddi",
-          location = LatLng(29.9601561,31.2569138)
+            latitude = 29.9601561,
+            longitude = 31.2569138
         )
     )
 
-    override suspend fun addCarToDB(car: CarModel): CarModel? {
+    override suspend fun addCar(car: CarModel): CarModel? {
         val dbKey = car.carName
         if (!fakeDB.containsKey(dbKey)) {
             fakeDB[dbKey] = car
@@ -24,11 +25,11 @@ class FakeAddCarRepositoryTest:AddCarRepository {
         return null
     }
 
-    override suspend fun removeCarFromBB(car: CarModel): CarModel? {
+    override suspend fun removeCar(car: CarModel): CarModel? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateCarFromDB(car: CarModel): CarModel? {
+    override suspend fun updateCar(car: CarModel): CarModel? {
         TODO("Not yet implemented")
     }
 }

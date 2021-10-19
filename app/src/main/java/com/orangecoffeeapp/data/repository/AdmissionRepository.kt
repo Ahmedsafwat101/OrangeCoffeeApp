@@ -9,5 +9,4 @@ interface AdmissionRepository {
     suspend fun validateUserSignUp(user: UserModel): UserModel?
     suspend fun updateUser(user: UserModel): UserModel?
 
-
 }

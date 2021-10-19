@@ -56,8 +56,6 @@ class AdminMainActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        finishAffinity()
-    }
+
 
 }

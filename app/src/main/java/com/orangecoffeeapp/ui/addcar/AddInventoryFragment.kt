@@ -22,15 +22,16 @@ import kotlinx.android.synthetic.main.fragment_add_inventory.*
 import android.view.Gravity
 
 import android.widget.FrameLayout
+import android.widget.Toast
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.appcompat.app.AppCompatActivity
-
-
-
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
+import com.google.android.gms.maps.model.LatLng
 
 
 @AndroidEntryPoint
-class AddInventoryFragment : BottomSheetDialogFragment() {
+class AddInventoryFragment : Fragment() {
     private val TAG = "AddInventoryFragment"
 
    private lateinit var currCar:CarModel
@@ -51,30 +52,41 @@ class AddInventoryFragment : BottomSheetDialogFragment() {
         addInventoryBtn.setOnClickListener {
             it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
 
-            addCarViewModel.addCar(CarModel(
-                carName = currCar.carName,
-                address = currCar.address,
-                location = currCar.location,
-                inventory = InventoryItemModel(
-                    coffeeBeans = coffeeQTxt.text.toString().toInt(),
-                    milk = milkQTxt.text.toString().toInt(),
-                    sugar = sugarQTxt.text.toString().toInt(),
-                    water = waterQTxt.text.toString().toInt()
+            val args = this.arguments
+            if (args != null) {
+
+                val carName = args.getString("carName").toString()
+                val carAddress = args.getString("carAddress").toString()
+                val latitude = args.getDouble("latitude")
+                val longitude = args.getDouble("longitude")
+
+                addCarViewModel.addCar(
+                    CarModel(
+                        carName = carName,
+                        address = carAddress,
+                        latitude = latitude,
+                        longitude=  longitude,
+                        inventory = InventoryItemModel(
+                            coffeeBeans = coffeeQTxt.text.toString().toInt(),
+                            milk = milkQTxt.text.toString().toInt(),
+                            sugar = sugarQTxt.text.toString().toInt(),
+                            water = waterQTxt.text.toString().toInt()
+                        )
+                    )
                 )
-            ))
+            }
         }
     }
 
-    override fun getTheme(): Int {
-        return R.style.CustomBottomSheetDialog
-    }
+
 
     private fun subscribeObserver() {
         addCarViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
             when (result){
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                    displaySnackbar("Car and Inventory are added Successfully! ", R.color.Green_300)
+                    DisplayToast("DONE!")
+                    findNavController().navigate(R.id.action_addInventoryFragment_to_addCarFragment)
                     //dismiss()
                 }
                 is AdmissionState.Loading -> {
@@ -93,7 +105,7 @@ class AddInventoryFragment : BottomSheetDialogFragment() {
                             coffeeQTxt.error = result.e
                             waterQTxt.error = result.e                        }
                     }
-                    displaySnackbar(result.e, R.color.Red_200)
+                    DisplayToast(result.e)
                     Log.d("here", "Error ${result.e}")
                 }
                 else -> {
@@ -111,18 +123,10 @@ class AddInventoryFragment : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("ResourceAsColor")
-    private fun displaySnackbar(message: String, color: Int) {
-        val snack: Snackbar = Snackbar.make(parentAddInventory, message, Snackbar.LENGTH_LONG)
-        val view = snack.view
-        view.bringToFront()
-        val params = view.layoutParams as CoordinatorLayout.LayoutParams
-        params.gravity = Gravity.TOP
-        params.topMargin = 15
-        snack.setBackgroundTintMode(PorterDuff.Mode.LIGHTEN)
-        snack.setBackgroundTint(R.color.white)
-        snack.setAction("CLOSE") { }
-        snack.show()
+    private fun DisplayToast(message: String) {
+       Toast.makeText(requireActivity(),message,Toast.LENGTH_LONG).show()
     }
+
 
     override fun onResume() {
         super.onResume()
@@ -133,6 +137,8 @@ class AddInventoryFragment : BottomSheetDialogFragment() {
         super.onStop()
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
+
+
 
 
 

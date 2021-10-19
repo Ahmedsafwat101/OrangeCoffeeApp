@@ -87,7 +87,9 @@ class LogInFragment : Fragment() {
                     displayProgressbar(false)
                     //save in SharedPreference
                    UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
+                   requireActivity().finish()
                    startActivity(NavigateToActivity.moveToHomeActivity(result.data.type,requireActivity())) // Move to another activity
+
                 }
                 is AdmissionState.Loading -> {
                     displayProgressbar(true)

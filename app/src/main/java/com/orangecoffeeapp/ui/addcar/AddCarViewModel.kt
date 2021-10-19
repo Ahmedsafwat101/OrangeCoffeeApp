@@ -29,7 +29,7 @@ class AddCarViewModel @Inject constructor(private val repo: AddCarRepository) : 
         val currCar = data as CarModel
         if (validateInventoryFields(currCar.inventory.coffeeBeans,currCar.inventory.milk,currCar.inventory.water,currCar.inventory.sugar)) {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = repo.addCarToDB(currCar)
+                val response = repo.addCar(currCar)
                 if (response != null) {
                     carStates.postValue(AdmissionState.Success(response))
                 } else {
@@ -49,8 +49,8 @@ class AddCarViewModel @Inject constructor(private val repo: AddCarRepository) : 
         return true
     }
 
-     fun validateAddCarFields(carName: String, address: String, location: LatLng): Boolean {
-        val result = AddCarFormUtils.validateAddCarForm(carName, address, location)
+     fun validateAddCarFields(carName: String, address: String, latitude: Double,longitude:Double): Boolean {
+        val result = AddCarFormUtils.validateAddCarForm(carName, address, latitude,longitude)
         if (result != ErrorMessage.NONE) {
             carStates.postValue(AdmissionState.Error(result))
             return false
@@ -63,9 +63,9 @@ class AddCarViewModel @Inject constructor(private val repo: AddCarRepository) : 
 
     fun addCarTest(data: Any) {
         val currCar = data as CarModel
-        if (validateAddCarFields(currCar.carName, currCar.address, currCar.location)) {
+        if (validateAddCarFields(currCar.carName, currCar.address, currCar.latitude,currCar.longitude)) {
             viewModelScope.launch(Dispatchers.IO) {
-                val response = repo.addCarToDB(currCar)
+                val response = repo.addCar(currCar)
                 if (response != null) {
                     carStates.postValue(AdmissionState.Success(response))
                 } else {
