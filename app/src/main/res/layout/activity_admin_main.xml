@@ -17,18 +17,20 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_menu"/>
+        app:menu="@menu/bottom_menu" />
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/adminFragmentContainerView"
         android:name="androidx.navigation.fragment.NavHostFragment"
-        android:layout_width="409dp"
-        android:layout_height="672dp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:translationZ="180dp"
         app:defaultNavHost="true"
         app:layout_constraintBottom_toTopOf="@+id/adminBottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:navGraph="@navigation/admin_nav"
-        />
+        app:navGraph="@navigation/admin_nav" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

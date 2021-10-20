@@ -1,12 +1,16 @@
 package com.orangecoffeeapp.ui.addcar
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,6 +21,7 @@ import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentLinkingBinding
 import com.orangecoffeeapp.ui.adapters.CarRecyclerAdapter
 import com.orangecoffeeapp.ui.adapters.OwnerRecyclerAdapter
+import com.orangecoffeeapp.ui.edituser.EditUserActivity
 import com.orangecoffeeapp.utils.admission.AdmissionState
 import com.orangecoffeeapp.utils.Hashing
 import dagger.hilt.android.AndroidEntryPoint
@@ -41,7 +46,11 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
     private var currOwnerPos = -1;
 
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
 
+    }
 
 
     override fun onCreateView(
@@ -238,5 +247,17 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
         findNavController().navigate(R.id.action_linkingFragment_to_ownerDetailsFragment,bundle)
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+
+            R.id.updateProfile -> {
+                val intent = Intent(requireActivity(), EditUserActivity::class.java)
+                startActivity(intent)
+                false
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
 }

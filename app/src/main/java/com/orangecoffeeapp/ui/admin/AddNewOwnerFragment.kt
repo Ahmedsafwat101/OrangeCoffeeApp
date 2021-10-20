@@ -71,9 +71,10 @@ class AddNewOwnerFragment : Fragment() {
             when (result) {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
-                   // displaySnackbar("Owner is added Successfully! ", R.color.green_300)
-                    val intent = Intent(requireActivity(),AddCarActivity::class.java)
-                    startActivity(intent)
+                    displaySnackbar("Owner is added Successfully! ", R.color.green_300)
+                   // val intent = Intent(requireActivity(),AddCarActivity::class.java)
+                   // startActivity(intent)
+                //    requireActivity().finish()
                 }
                 is AdmissionState.Loading -> {
                     displayProgressbar(true)

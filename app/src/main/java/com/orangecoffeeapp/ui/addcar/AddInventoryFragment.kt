@@ -1,6 +1,7 @@
 package com.orangecoffeeapp.ui.addcar
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_inventory.*
 import android.view.Gravity
+import android.view.View.GONE
 
 import android.widget.FrameLayout
 import android.widget.Toast
@@ -28,6 +30,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.orangecoffeeapp.ui.admin.AdminMainActivity
+import com.orangecoffeeapp.utils.admission.NavigateToActivity
+import kotlinx.android.synthetic.main.activity_admin_main.view.*
 
 
 @AndroidEntryPoint
@@ -86,7 +92,9 @@ class AddInventoryFragment : Fragment() {
                 is AdmissionState.Success -> {
                     displayProgressbar(false)
                     DisplayToast("DONE!")
-                    findNavController().navigate(R.id.action_addInventoryFragment_to_addCarFragment)
+                    requireActivity().finish()
+                    val intent = Intent( requireActivity(),AdminMainActivity::class.java)
+                    startActivity(intent)
                     //dismiss()
                 }
                 is AdmissionState.Loading -> {
@@ -122,21 +130,17 @@ class AddInventoryFragment : Fragment() {
         progress_circularAddInventory.visibility = if (isDisplayed) View.VISIBLE else View.GONE
     }
 
-    @SuppressLint("ResourceAsColor")
     private fun DisplayToast(message: String) {
        Toast.makeText(requireActivity(),message,Toast.LENGTH_LONG).show()
     }
 
 
-    override fun onResume() {
-        super.onResume()
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
         (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
     }
 
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
 
 
 

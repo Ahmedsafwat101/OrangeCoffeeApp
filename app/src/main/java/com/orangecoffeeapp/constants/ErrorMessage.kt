@@ -29,6 +29,7 @@ object ErrorMessage {
     const val ERROR_NO_OWNER_SELECTED = "Please select an owner!"
     const val ERROR_NO_CAR_SELECTED = "Please select a car !"
     const val ERROR_OWNER_OR_CAR_NOT_EXISTS = "Refresh your data "
+    const val ERROR_NO_LINKED_DATA_FOUND = "No Data Available"
 
 
     const val NONE = "No Error"

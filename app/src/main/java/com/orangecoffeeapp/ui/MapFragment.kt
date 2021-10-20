@@ -30,20 +30,11 @@ import com.orangecoffeeapp.databinding.FragmentMapBinding
 import java.io.IOException
 import java.util.*
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import com.orangecoffeeapp.ui.addcar.AddCarFragment
 
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [MapFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class MapFragment : Fragment(), OnMapReadyCallback {
 
 
@@ -54,18 +45,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     private var currLatLng: LatLng = LatLng(0.0, 0.0)
 
 
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
 
     override fun onCreateView(
@@ -99,7 +78,7 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 bundle.putDouble("latitude",currLatLng.latitude)
                 bundle.putDouble("longitude",currLatLng.longitude)
 
-                findNavController().navigate(R.id.action_mapFragment_to_addInventoryFragment,bundle)
+                findNavController().navigate(R.id.action_mapFragment2_to_addInventoryFragment2,bundle)
             }
             else {
                 it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
@@ -274,23 +253,11 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     }
 
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment MapFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            MapFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+
     }
+
+
 }

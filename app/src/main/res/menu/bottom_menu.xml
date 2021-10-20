@@ -1,19 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
 
     <item
         android:id="@+id/HomeFragment"
         android:title="Home"
-        android:icon="@drawable/ic_baseline_home_24"
+        android:icon="@drawable/linked"
         />
     <item
         android:id="@+id/addNewCarFragment"
-        android:title="New"
-        android:icon="@drawable/ic_baseline_add_business_24"
+        android:title="Add Owner"
+        android:icon="@drawable/waitress"
+        />
+    <item
+        android:id="@+id/addCarFragment2"
+        android:title="Add Car"
+        android:icon="@drawable/coffee_truck"
+        />
+    <item
+        android:id="@+id/linkingFragment"
+        android:title="Link"
+        android:icon="@drawable/link"
         />
     <item
         android:id="@+id/analyticsFragment"
         android:title="Analytics"
-        android:icon="@drawable/ic_baseline_analytics_24"
+        android:icon="@drawable/analytics"
         />
+
 </menu>

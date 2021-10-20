@@ -9,15 +9,19 @@ import com.orangecoffeeapp.R
 import com.orangecoffeeapp.databinding.ActivityAdminMainBinding
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupActionBarWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class AdminMainActivity : AppCompatActivity() {
     lateinit var navController:NavController
     lateinit var navHostFragment:NavHostFragment
+    private lateinit var bottomNavigation:BottomNavigationView
+   // private lateinit var navHostFragment
 
     private lateinit var adminMainActivityBinding: ActivityAdminMainBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +30,65 @@ class AdminMainActivity : AppCompatActivity() {
         val view = adminMainActivityBinding.root
         setContentView(view)
 
-
-        val bottomNavigation = adminMainActivityBinding.adminBottomNavigationView
-         navHostFragment = supportFragmentManager.findFragmentById(R.id.adminFragmentContainerView) as NavHostFragment
+         bottomNavigation = adminMainActivityBinding.adminBottomNavigationView
+        navHostFragment = supportFragmentManager.findFragmentById(R.id.adminFragmentContainerView) as NavHostFragment
          navController = navHostFragment.navController
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(R.id.HomeFragment,R.id.addNewCarFragment,R.id.analyticsFragment)
-        )
-        setupActionBarWithNavController(navController,appBarConfiguration)
+
+        bottomNavigation.itemIconTintList = null;
 
         bottomNavigation.setupWithNavController(navController)
 
+        navController.addOnDestinationChangedListener{ _, destination, _ ->
+            when (destination.id) {
+                R.id.mapFragment2 -> {
+                    supportActionBar?.hide()
+                    hideBottomNav()
+                }
+                R.id.addInventoryFragment2 ->{
+                    supportActionBar?.hide()
+                    hideBottomNav()
+                }
+                R.id.HomeFragment -> {
+                    supportActionBar?.show()
+                    showBottomNav()
+                }
+                R.id.addCarFragment2 -> {
+                    supportActionBar?.hide()
+                    showBottomNav()
+                }
+                R.id.linkingFragment -> {
+                    supportActionBar?.hide()
+                    showBottomNav()
+                }
+                R.id.analyticsFragment ->{
+                    supportActionBar?.hide()
+                    showBottomNav()
+                }
+                R.id.addNewCarFragment ->{
+                    supportActionBar?.hide()
+                    showBottomNav()
+                }
+                else -> hideBottomNav()
+            }
+        }
+
+        val appBarConfiguration = AppBarConfiguration(
+            setOf(R.id.HomeFragment,R.id.addNewCarFragment,R.id.analyticsFragment,R.id.linkingFragment,R.id.addCarFragment2)
+        )
+
+        setupActionBarWithNavController(navController,appBarConfiguration)
     }
+
+    private fun showBottomNav() {
+
+        bottomNavigation.visibility = View.VISIBLE
+    }
+
+    private fun hideBottomNav() {
+        bottomNavigation.visibility = View.GONE
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val inflater = menuInflater
         inflater.inflate(R.menu.options_menu, menu)
@@ -55,6 +106,7 @@ class AdminMainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
 
 
 

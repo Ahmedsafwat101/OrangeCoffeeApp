@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var userSharedPref: UserSharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main)
 
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
 
 
-        // checkSharedPreference()
+         checkSharedPreference()
     }
 
     /*override fun onResume() {

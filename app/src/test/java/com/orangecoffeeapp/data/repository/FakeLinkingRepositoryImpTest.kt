@@ -1,6 +1,7 @@
 package com.orangecoffeeapp.data.repository
 
 import com.orangecoffeeapp.data.models.CarModel
+import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.utils.Hashing
 import kotlinx.coroutines.tasks.await
@@ -79,6 +80,10 @@ class FakeLinkingRepositoryImpTest : LinkingRepository {
             return  true
         }
         return false
+    }
+
+    override suspend fun getLinkedCarWithOwner(): List<LinkedCarsWithOwners>? {
+        TODO("Not yet implemented")
     }
 
 }

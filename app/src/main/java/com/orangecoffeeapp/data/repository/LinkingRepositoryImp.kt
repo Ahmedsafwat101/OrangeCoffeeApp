@@ -3,6 +3,7 @@ package com.orangecoffeeapp.data.repository
 import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.orangecoffeeapp.data.models.CarModel
+import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.utils.Hashing
 import kotlinx.coroutines.tasks.await
@@ -41,6 +42,7 @@ class LinkingRepositoryImp @Inject constructor(private val db: FirebaseFirestore
         val dbKey = Hashing.sha256(owner.email).toString() // hashed email
             val snapShot1 = db.collection("Users").document(dbKey).get().await()
             val snapShot2 = db.collection("Cars").document(car.carName).get().await()
+            db.collection("LinkedCarsWithOwners").add(LinkedCarsWithOwners(carModel = car,userModel = owner)).await()
 
             if (snapShot1.exists() && snapShot2.exists()) {
                 owner.carID = car.carName
@@ -50,6 +52,19 @@ class LinkingRepositoryImp @Inject constructor(private val db: FirebaseFirestore
                 return  true
             }
         return false
+    }
+
+    override suspend fun getLinkedCarWithOwner(): List<LinkedCarsWithOwners>? {
+        var ans:ArrayList<LinkedCarsWithOwners>? = null
+        val snapShot = db.collection("LinkedCarsWithOwners").get().await()
+        snapShot?.let {
+            ans = ArrayList()
+            it.forEach { doc ->
+                ans?.add(doc.toObject(LinkedCarsWithOwners::class.java))
+                Log.d(TAG, "data$db")
+            }
+        }
+        return ans
     }
 
 

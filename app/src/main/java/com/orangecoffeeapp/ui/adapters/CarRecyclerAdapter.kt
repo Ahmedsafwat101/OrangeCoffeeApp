@@ -72,5 +72,6 @@ class CarRecyclerAdapter(private val onCarItemListener:OnCarItemListener ): Recy
         fun onCarItemClicked(position: Int)
         fun onCarItemClickedShowDetails(position: Int)
     }
+    //argument fun
 
 }

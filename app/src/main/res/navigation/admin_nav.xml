@@ -9,15 +9,69 @@
         android:id="@+id/HomeFragment"
         android:name="com.orangecoffeeapp.ui.admin.AdminHomeFragment"
         android:label="Home"
-        tools:layout="@layout/fragment_admin_home" />
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_HomeFragment_to_linkedDetailsFragment"
+            app:destination="@id/linkedDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addNewCarFragment"
         android:name="com.orangecoffeeapp.ui.admin.AddNewOwnerFragment"
-        android:label="New"
+        android:label="New Owner"
         tools:layout="@layout/fragment_admin_add_new_owner" />
     <fragment
         android:id="@+id/analyticsFragment"
         android:name="com.orangecoffeeapp.ui.admin.AdminAnalyticsFragment"
         android:label="Analytics"
         tools:layout="@layout/fragment_admin_analytics" />
+    <dialog
+        android:id="@+id/linkedDetailsFragment"
+        android:name="com.orangecoffeeapp.ui.admin.LinkedDetailsFragment"
+        android:label="fragment_linked_details"
+        tools:layout="@layout/fragment_linked_details" />
+    <fragment
+        android:id="@+id/linkingFragment"
+        android:name="com.orangecoffeeapp.ui.addcar.LinkingFragment"
+        android:label="Link"
+        tools:layout="@layout/fragment_linking" >
+        <action
+            android:id="@+id/action_linkingFragment_to_carDetailsFragment"
+            app:destination="@id/carDetailsFragment" />
+        <action
+            android:id="@+id/action_linkingFragment_to_ownerDetailsFragment"
+            app:destination="@id/ownerDetailsFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/carDetailsFragment"
+        android:name="com.orangecoffeeapp.ui.addcar.CarDetailsFragment"
+        android:label="fragment_car_details"
+        tools:layout="@layout/fragment_car_details" />
+    <dialog
+        android:id="@+id/ownerDetailsFragment"
+        android:name="com.orangecoffeeapp.ui.addcar.OwnerDetailsFragment"
+        android:label="fragment_owner_details"
+        tools:layout="@layout/fragment_owner_details" />
+    <fragment
+        android:id="@+id/addCarFragment2"
+        android:name="com.orangecoffeeapp.ui.addcar.AddCarFragment"
+        android:label="Add Car"
+        tools:layout="@layout/fragment_add_car" >
+        <action
+            android:id="@+id/action_addCarFragment2_to_mapFragment2"
+            app:destination="@id/mapFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/mapFragment2"
+        android:name="com.orangecoffeeapp.ui.MapFragment"
+        android:label="Add Car"
+        tools:layout="@layout/fragment_map" >
+        <action
+            android:id="@+id/action_mapFragment2_to_addInventoryFragment2"
+            app:destination="@id/addInventoryFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addInventoryFragment2"
+        android:name="com.orangecoffeeapp.ui.addcar.AddInventoryFragment"
+        android:label="fragment_add_inventory"
+        tools:layout="@layout/fragment_add_inventory" />
 </navigation>

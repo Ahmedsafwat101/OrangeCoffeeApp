@@ -9,6 +9,7 @@ import androidx.viewbinding.ViewBinding
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.databinding.ActivityAddCarBinding
 import com.orangecoffeeapp.ui.admin.AdminMainActivity
+import com.orangecoffeeapp.utils.IOnBackPressed
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,13 +23,19 @@ class AddCarActivity : AppCompatActivity() {
 
 
 
-    override fun onBackPressed() {
-        this.finish()
-        val intent = Intent(this, AdminMainActivity::class.java)
-        intent.flags =
-            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-        startActivity(intent)
-    }
+   /* override fun onBackPressed() {
+
+
+            /*this.finish()
+            val intent = Intent(this, AdminMainActivity::class.java)
+            intent.flags =
+                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)*/
+
+        }
+
+    }*/
+
 
     fun setActionBarTitle(title: String?) {
         actionBar?.title = title

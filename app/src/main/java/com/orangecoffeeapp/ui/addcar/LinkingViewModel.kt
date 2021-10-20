@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.ErrorMessage.NONE
 import com.orangecoffeeapp.data.models.CarModel
+import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.LinkingRepository
 import com.orangecoffeeapp.utils.addcar.LinkFormValidation.validateLinkForm
@@ -21,10 +22,13 @@ class LinkingViewModel @Inject constructor(private val repo: LinkingRepository) 
     private val ownersState = MutableLiveData<AdmissionState<List<UserModel>>>()
     private val carsState = MutableLiveData<AdmissionState<List<CarModel>>>()
     private val linkingState = MutableLiveData<AdmissionState<Boolean>>()
+    private val linkedState = MutableLiveData<AdmissionState<List<LinkedCarsWithOwners>>>()
 
     fun getOwnersState() = ownersState
     fun getCarsState() = carsState
     fun getLinkingState() = linkingState
+    fun getLinkedState() = linkedState
+
 
     fun getAllOwners() {
         ownersState.postValue(AdmissionState.Loading)
@@ -70,6 +74,22 @@ class LinkingViewModel @Inject constructor(private val repo: LinkingRepository) 
             }
         }
     }
+
+    fun getAllLinkedData() {
+        linkedState.postValue(AdmissionState.Loading)
+        viewModelScope.launch(Dispatchers.IO) {
+            val response = repo.getLinkedCarWithOwner()
+            if (response != null) {
+                if (response.isEmpty())
+                    linkedState.postValue(AdmissionState.Error(ErrorMessage.ERROR_NO_LINKED_DATA_FOUND))
+                else
+                    linkedState.postValue(AdmissionState.Success(response))
+            } else {
+                linkedState.postValue(AdmissionState.Error(ErrorMessage.ERROR_NETWORK_ERROR))
+            }
+        }
+    }
+
 
 
     private fun validateLinkingFields(ownerName: String, carName: String): Boolean {
