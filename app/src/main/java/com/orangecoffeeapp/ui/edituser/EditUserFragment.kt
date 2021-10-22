@@ -12,9 +12,9 @@ import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentEditUserBinding
-import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
+import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
 import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -72,16 +72,16 @@ class EditUserFragment : Fragment() {
     private fun subscribeObserver() {
         admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     displaySnackbar("Data Updates Successfully! ", com.orangecoffeeapp.R.color.Green_300)
                     UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     when (result.e) {
                         ErrorMessage.ERROR_EMPTY_FNAME_MSG -> {
                             editUserBinding.updateFNameTxt.error = result.e

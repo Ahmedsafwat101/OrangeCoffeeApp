@@ -9,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.addCallback
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -22,8 +20,8 @@ import com.orangecoffeeapp.databinding.FragmentLinkingBinding
 import com.orangecoffeeapp.ui.adapters.CarRecyclerAdapter
 import com.orangecoffeeapp.ui.adapters.OwnerRecyclerAdapter
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
-import com.orangecoffeeapp.utils.admission.AdmissionState
-import com.orangecoffeeapp.utils.Hashing
+import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -82,7 +80,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
     private fun subscribeObserver() {
         linkingViewModel.getLinkingState().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     displaySnackbar("Linked Successfully!")
                     carsData.removeAt(currCarPos)
@@ -95,11 +93,11 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
                     linkingBinding.coffeeCarTxt.setText("")
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
 
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")
@@ -114,7 +112,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
     private fun subscribeObserverToCars() {
         linkingViewModel.getCarsState().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     Log.d(TAG, "data " + result.data)
                     displayProgressbar(false)
                     carsData.addAll(result.data)
@@ -123,11 +121,11 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
                     Log.d(TAG, "LIST " + ownersData.toString())
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
 
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")
@@ -147,7 +145,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
     private fun subscribeObserverToOwners() {
         linkingViewModel.getOwnersState().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     Log.d(TAG, "data " + result.data)
                     displayProgressbar(false)
                     ownersData.addAll(result.data)
@@ -155,11 +153,11 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
                     Log.d(TAG, "LIST " + ownersData.toString())
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
 
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")

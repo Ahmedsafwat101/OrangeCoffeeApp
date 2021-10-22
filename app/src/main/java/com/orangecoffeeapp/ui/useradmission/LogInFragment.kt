@@ -21,8 +21,9 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_IS_EMPTY
 import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_LENGTH_LESS_THAN_8
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.databinding.FragmentLogInBinding
+import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
 import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import com.orangecoffeeapp.utils.admission.NavigateToActivity
 
 @AndroidEntryPoint
@@ -83,7 +84,7 @@ class LogInFragment : Fragment() {
     private fun subscribeObserver() {
         admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result){
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     //save in SharedPreference
                    UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
@@ -91,10 +92,10 @@ class LogInFragment : Fragment() {
                    startActivity(NavigateToActivity.moveToHomeActivity(result.data.type,requireActivity())) // Move to another activity
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     when (result.e) {
                         ERROR_EMAIL_IS_EMPTY -> {

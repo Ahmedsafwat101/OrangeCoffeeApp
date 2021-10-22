@@ -16,7 +16,7 @@ class FakeAddCarRepositoryTest:AddCarRepository {
         )
     )
 
-    override suspend fun addCar(car: CarModel): CarModel? {
+    override suspend fun addCarMenu(car: CarModel): CarModel? {
         val dbKey = car.carName
         if (!fakeDB.containsKey(dbKey)) {
             fakeDB[dbKey] = car

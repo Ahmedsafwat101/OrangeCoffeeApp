@@ -1,10 +1,6 @@
 package com.orangecoffeeapp.ui.addcar
 
-import android.Manifest
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.location.Address
-import android.location.Geocoder
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,60 +8,26 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.SearchView
-import android.widget.Toast
-import androidx.activity.addCallback
-import androidx.appcompat.app.ActionBar
-import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.maps.CameraUpdateFactory
-import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.OnMapReadyCallback
-import com.google.android.gms.maps.SupportMapFragment
-import com.google.android.gms.maps.model.BitmapDescriptorFactory
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.gms.maps.model.MapStyleOptions
-import com.google.android.gms.maps.model.MarkerOptions
 import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
-import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.databinding.FragmentAddCarBinding
-import com.orangecoffeeapp.ui.admin.AdminMainActivity
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
-import com.orangecoffeeapp.utils.CarSharedPreferenceManager
-import com.orangecoffeeapp.utils.IOnBackPressed
-import com.orangecoffeeapp.utils.admission.AdmissionState
-import dagger.hilt.EntryPoint
+import com.orangecoffeeapp.ui.viewmodels.CarViewModel
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.IOException
-import java.util.*
 
 @AndroidEntryPoint
 class AddCarFragment : Fragment() {
     private val TAG = "MapFragment"
     private lateinit var addCarBinding: FragmentAddCarBinding
-    private val addCarViewModel: AddCarViewModel by viewModels()
+    private val carViewModel: CarViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-
-
-        // This callback will only be called when MyFragment is at least Started.
-       /* requireActivity().onBackPressedDispatcher.addCallback(this) {
-            requireActivity().finish()
-            val intent = Intent(requireActivity(), AdminMainActivity::class.java)
-            intent.flags =
-                Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }*/
-
-        // The callback can be enabled or disabled here or in the lambda
     }
 
     override fun onCreateView(
@@ -91,7 +53,7 @@ class AddCarFragment : Fragment() {
             it?.apply { isEnabled = false; postDelayed({ isEnabled = true }, 400) }
 
 
-            if (addCarViewModel.validateAddCarFields(
+            if (carViewModel.validateAddCarFields(
                     carName = addCarBinding.addCarNameTxt.text.toString(),
                     address = addCarBinding.addCarAddressTxt.text.toString(),
                     latitude = 1.0,
@@ -110,9 +72,9 @@ class AddCarFragment : Fragment() {
 
 
     private fun subscribeObserver() {
-        addCarViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
+        carViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     when (result.e) {
                         ErrorMessage.Error_Car_NAME_IS_EMPTY -> {
@@ -144,7 +106,6 @@ class AddCarFragment : Fragment() {
     }
 
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
 
@@ -157,7 +118,3 @@ class AddCarFragment : Fragment() {
         }
     }
 }
-
-
-
-//Move all logic in separate class  and fix the stack call

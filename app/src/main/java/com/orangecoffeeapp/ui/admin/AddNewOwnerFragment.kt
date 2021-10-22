@@ -11,13 +11,12 @@ import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentAdminAddNewOwnerBinding
-import com.orangecoffeeapp.ui.useradmission.AdmissionViewModel
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.view.*
 import com.orangecoffeeapp.R
-import com.orangecoffeeapp.ui.addcar.AddCarActivity
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
 
 
@@ -69,17 +68,17 @@ class AddNewOwnerFragment : Fragment() {
     private fun subscribeObserver() {
         admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     displaySnackbar("Owner is added Successfully! ", R.color.green_300)
                    // val intent = Intent(requireActivity(),AddCarActivity::class.java)
                    // startActivity(intent)
                 //    requireActivity().finish()
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     when (result.e) {
                         ErrorMessage.ERROR_EMPTY_FNAME_MSG -> {
                             addNewOwnerBinding.ownerFNameTxt.error = result.e

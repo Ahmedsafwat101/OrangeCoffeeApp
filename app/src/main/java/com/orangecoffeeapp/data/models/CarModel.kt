@@ -1,8 +1,7 @@
 package com.orangecoffeeapp.data.models
 
-
-import com.google.android.gms.maps.model.LatLng
 import java.io.Serializable
+
 
 data class CarModel(
     var carID: String? ="",
@@ -11,8 +10,10 @@ data class CarModel(
     var address: String ="",
     var latitude:Double=0.0,
     var longitude:Double = 0.0,
-    var menu: List<MenuModel> = listOf(),
+    var menuItems: ArrayList<MenuItemModel> = ArrayList(),
     var inventory: InventoryItemModel = InventoryItemModel(),
     var active: Boolean = true,
     var isTaken:Boolean = false
-)
+):Serializable
+
+

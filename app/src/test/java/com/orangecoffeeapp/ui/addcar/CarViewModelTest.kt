@@ -1,24 +1,24 @@
 package com.orangecoffeeapp.ui.addcar
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.google.android.gms.maps.model.LatLng
 import com.google.common.truth.Truth
 import com.orangecoffeeapp.MainCoroutineRule
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.repository.FakeAddCarRepositoryTest
 import com.orangecoffeeapp.getOrAwaitValueTest
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.ui.viewmodels.CarViewModel
+import com.orangecoffeeapp.utils.DataState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class AddCarViewModelTest{
+class CarViewModelTest{
 
     // I already check the validation of the input in AddCatFormUtilsTest under Test module
 
-    private lateinit var addCarViewModel: AddCarViewModel
+    private lateinit var carViewModel: CarViewModel
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -29,7 +29,7 @@ class AddCarViewModelTest{
 
     @Before
     fun setUp() {
-        addCarViewModel = AddCarViewModel(FakeAddCarRepositoryTest())
+        carViewModel = CarViewModel(FakeAddCarRepositoryTest())
     }
 
 
@@ -43,12 +43,12 @@ class AddCarViewModelTest{
             longitude = 31.2569138
         )
 
-        addCarViewModel.addCarTest(car)
+        carViewModel.addCarTest(car)
 
-        val value = addCarViewModel.getCarStates().getOrAwaitValueTest()
+        val value = carViewModel.getCarStates().getOrAwaitValueTest()
 
 
-        Truth.assertThat(value).isEqualTo(AdmissionState.Error(ErrorMessage.ERROR_CAR_ALREADY_EXISTS_MSG))
+        Truth.assertThat(value).isEqualTo(DataState.Error(ErrorMessage.ERROR_CAR_ALREADY_EXISTS_MSG))
     }
 
     @Test
@@ -61,12 +61,12 @@ class AddCarViewModelTest{
             longitude = 31.2569138
         )
 
-        addCarViewModel.addCarTest(car)
+        carViewModel.addCarTest(car)
 
-        val value = addCarViewModel.getCarStates().getOrAwaitValueTest()
+        val value = carViewModel.getCarStates().getOrAwaitValueTest()
 
 
-        Truth.assertThat(value).isEqualTo(AdmissionState.Success(car))
+        Truth.assertThat(value).isEqualTo(DataState.Success(car))
     }
 
 }

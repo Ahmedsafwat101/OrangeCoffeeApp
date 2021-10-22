@@ -1,6 +1,5 @@
-package com.orangecoffeeapp.ui.useradmission
+package com.orangecoffeeapp.ui.viewmodels
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -10,7 +9,7 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_DONT_HAVE_ACCESS
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.AdmissionRepository
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import com.orangecoffeeapp.utils.admission.LoginFormUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -29,26 +28,26 @@ class AdmissionViewModel
 @Inject
 constructor(private val repo: AdmissionRepository) : ViewModel() {
     private val TAG = "MyViewModel"
-    private val userStates = MutableLiveData<AdmissionState<UserModel>>()
+    private val userStates = MutableLiveData<DataState<UserModel>>()
 
 
     fun getUserStates() = userStates
 
 
     fun logIn(data: Any) {
-        userStates.postValue(AdmissionState.Loading)
+        userStates.postValue(DataState.Loading)
         val currUser = data as LoginFormModel
         if (validateLoginFields(currUser.email, currUser.password)) {
              viewModelScope.launch(Dispatchers.IO) {
                 val response = repo.validateUserLogin(currUser)
                 if (response != null) {
                     if (response.password == currUser.password) {
-                        userStates.postValue(AdmissionState.Success(response))
+                        userStates.postValue(DataState.Success(response))
                     } else {
-                        userStates.postValue(AdmissionState.Error(ERROR_PASSWORD_WRONG_MSG))
+                        userStates.postValue(DataState.Error(ERROR_PASSWORD_WRONG_MSG))
                     }
                 } else {
-                    userStates.postValue(AdmissionState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
+                    userStates.postValue(DataState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
                 }
             }
         }
@@ -56,15 +55,15 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
 
 
     fun signUp(data: Any) {
-        userStates.postValue(AdmissionState.Loading)
+        userStates.postValue(DataState.Loading)
         val currUser = data as UserModel
         if (validateSignUpFields(currUser.firstName, currUser.lastName, currUser.email, currUser.password, currUser.phone)) {
             viewModelScope.launch(Dispatchers.IO) {
                 val response = repo.validateUserSignUp(currUser)
                 if (response != null) {
-                    userStates.postValue(AdmissionState.Success(response))
+                    userStates.postValue(DataState.Success(response))
                 }else {
-                    userStates.postValue(AdmissionState.Error(EMAIL_ALREADY_EXISTS_MSG))
+                    userStates.postValue(DataState.Error(EMAIL_ALREADY_EXISTS_MSG))
                 }
             }
         }
@@ -72,7 +71,7 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
 
 
     fun update(data:Any){
-        userStates.postValue(AdmissionState.Loading)
+        userStates.postValue(DataState.Loading)
         val currUser = data as UserModel
         if (validateEditFields(currUser.firstName, currUser.lastName, currUser.password, currUser.phone)) {
 
@@ -80,9 +79,9 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
                 val response = repo.updateUser(currUser)
                 if (response != null) {
                     if (response.access)
-                        userStates.postValue(AdmissionState.Success(response))
+                        userStates.postValue(DataState.Success(response))
                     else
-                        userStates.postValue(AdmissionState.Error(ERROR_DONT_HAVE_ACCESS))
+                        userStates.postValue(DataState.Error(ERROR_DONT_HAVE_ACCESS))
                 }
 
             }
@@ -95,7 +94,7 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
      private fun validateLoginFields(email: String, password: String): Boolean {
         val result = LoginFormUtils.validateLoginForm(email, password)
         if (result != ErrorMessage.NONE) {
-            userStates.postValue(AdmissionState.Error(result))
+            userStates.postValue(DataState.Error(result))
             return false
         }
         return true
@@ -110,7 +109,7 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
     ): Boolean {
         val result = SignUpFormUtils.validateSignUpForm(fName, lName, email, password, phone)
         if (result != ErrorMessage.NONE) {
-            userStates.postValue(AdmissionState.Error(result))
+            userStates.postValue(DataState.Error(result))
             return false
         }
         return true
@@ -123,7 +122,7 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
         phone: String):Boolean{
         val result = EditFormUtils.validateEditForm(fName, lName, password, phone)
         if (result != ErrorMessage.NONE) {
-            userStates.postValue(AdmissionState.Error(result))
+            userStates.postValue(DataState.Error(result))
             return false
         }
         return true
@@ -138,12 +137,12 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
                 val response = repo.validateUserLogin(currUser)
                 if (response != null) {
                     if (response.password == currUser.password) {
-                        userStates.postValue(AdmissionState.Success(response))
+                        userStates.postValue(DataState.Success(response))
                     } else {
-                        userStates.postValue(AdmissionState.Error(ERROR_PASSWORD_WRONG_MSG))
+                        userStates.postValue(DataState.Error(ERROR_PASSWORD_WRONG_MSG))
                     }
                 } else {
-                    userStates.postValue(AdmissionState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
+                    userStates.postValue(DataState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
                 }
             }
     }
@@ -156,9 +155,9 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
             viewModelScope.launch(Dispatchers.IO) {
                 val response = repo.validateUserSignUp(currUser)
                 if (response != null) {
-                    userStates.postValue(AdmissionState.Success(response))
+                    userStates.postValue(DataState.Success(response))
                 }else {
-                    userStates.postValue(AdmissionState.Error(EMAIL_ALREADY_EXISTS_MSG))
+                    userStates.postValue(DataState.Error(EMAIL_ALREADY_EXISTS_MSG))
                 }
             }
         }
@@ -173,9 +172,9 @@ constructor(private val repo: AdmissionRepository) : ViewModel() {
                 val response = repo.updateUser(currUser)
                 if (response != null) {
                     if (response.access)
-                        userStates.postValue(AdmissionState.Success(response))
+                        userStates.postValue(DataState.Success(response))
                     else
-                        userStates.postValue(AdmissionState.Error(ERROR_DONT_HAVE_ACCESS))
+                        userStates.postValue(DataState.Error(ERROR_DONT_HAVE_ACCESS))
                 }
             }
         }

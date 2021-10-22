@@ -15,13 +15,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
-import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentAdminHomeBinding
-import com.orangecoffeeapp.ui.adapters.CarRecyclerAdapter
 import com.orangecoffeeapp.ui.adapters.LinkedRecyclerAdapter
-import com.orangecoffeeapp.ui.addcar.LinkingViewModel
+import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -53,16 +51,16 @@ class AdminHomeFragment : Fragment(),LinkedRecyclerAdapter.OnItemListener {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        subscribeObserverToOwners()
+        subscribeObserverToLinkedData()
         linkingViewModel.getAllLinkedData()
 
     }
 
 
-    private fun subscribeObserverToOwners() {
+    private fun subscribeObserverToLinkedData() {
         linkingViewModel.getLinkedState().observe(viewLifecycleOwner, { result ->
             when (result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     Log.d(TAG, "data " + result.data)
                     displayProgressbar(false)
                     linkedData = ArrayList()
@@ -70,11 +68,11 @@ class AdminHomeFragment : Fragment(),LinkedRecyclerAdapter.OnItemListener {
                     initRecyclerView()
 
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
 
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     displaySnackbar(result.e)
                     Log.d("here", "Error ${result.e}")

@@ -30,6 +30,11 @@ object ErrorMessage {
     const val ERROR_NO_CAR_SELECTED = "Please select a car !"
     const val ERROR_OWNER_OR_CAR_NOT_EXISTS = "Refresh your data "
     const val ERROR_NO_LINKED_DATA_FOUND = "No Data Available"
+    const val ERROR_ITEM_NAME_IS_EMPTY = "Please, add coffee name !"
+    const val ERROR_ITEM_PRICE_NOT_VALID = "Please, add a valid price !"
+    const val ERROR_CAR_NOT_EXISTS_MSG = "Car doesn't exists!"
+    const val ERROR_CAR_DONT_HAVE_MENU= "Car don't have menu!"
+
 
 
     const val NONE = "No Error"

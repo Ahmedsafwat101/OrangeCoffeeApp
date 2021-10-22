@@ -7,6 +7,7 @@ import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.utils.Hashing
 import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 import javax.inject.Inject
 
 class LinkingRepositoryImp @Inject constructor(private val db: FirebaseFirestore) :
@@ -42,11 +43,11 @@ class LinkingRepositoryImp @Inject constructor(private val db: FirebaseFirestore
         val dbKey = Hashing.sha256(owner.email).toString() // hashed email
             val snapShot1 = db.collection("Users").document(dbKey).get().await()
             val snapShot2 = db.collection("Cars").document(car.carName).get().await()
-            db.collection("LinkedCarsWithOwners").add(LinkedCarsWithOwners(carModel = car,userModel = owner)).await()
 
             if (snapShot1.exists() && snapShot2.exists()) {
                 owner.carID = car.carName
                 car.ownerID = dbKey
+                db.collection("LinkedCarsWithOwners").document(dbKey+car.carName).set(LinkedCarsWithOwners(carModel = car,userModel = owner)).await()
                 db.collection("Users").document(dbKey).set(owner).await()
                 db.collection("Cars").document(car.carName).set(car).await()
                 return  true
@@ -65,6 +66,23 @@ class LinkingRepositoryImp @Inject constructor(private val db: FirebaseFirestore
             }
         }
         return ans
+    }
+
+    override suspend fun updateLinkedCarWithOwner(
+        car: CarModel,
+        owner: UserModel
+    ): Boolean {
+
+        val dbKey = Hashing.sha256(owner.email).toString() // hashed email
+        return try{
+            db.collection("Cars").document(car.carName).set(car).await()
+            db.collection("LinkedCarsWithOwners").document(dbKey+car.carName).set(LinkedCarsWithOwners(car,owner)).await()
+            true
+        }catch (e:Exception){
+            false
+        }
+
+
     }
 
 

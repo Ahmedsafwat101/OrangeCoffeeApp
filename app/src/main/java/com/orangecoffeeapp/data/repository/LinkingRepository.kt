@@ -10,6 +10,6 @@ interface LinkingRepository {
     suspend fun getAllCars():List<CarModel>?
     suspend fun linkOwnerAndCar(owner:UserModel,car:CarModel):Boolean
     suspend fun getLinkedCarWithOwner():List<LinkedCarsWithOwners>?
-
+    suspend fun updateLinkedCarWithOwner(car: CarModel,owner: UserModel):Boolean
 
 }

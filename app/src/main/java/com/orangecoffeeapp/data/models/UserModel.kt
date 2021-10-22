@@ -1,5 +1,7 @@
 package com.orangecoffeeapp.data.models
 
+import java.io.Serializable
+
 
 data class UserModel(
     var firstName:String = "",
@@ -10,4 +12,4 @@ data class UserModel(
     var type:String="",
     var carID:String="",
     var access:Boolean = true
-)
+):Serializable

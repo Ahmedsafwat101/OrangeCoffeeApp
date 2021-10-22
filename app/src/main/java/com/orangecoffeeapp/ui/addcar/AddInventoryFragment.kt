@@ -1,39 +1,26 @@
 package com.orangecoffeeapp.ui.addcar
 
-import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.PorterDuff
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.models.InventoryItemModel
 import com.orangecoffeeapp.utils.CarSharedPreferenceManager
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_add_car.*
 import kotlinx.android.synthetic.main.fragment_add_inventory.*
-import android.view.Gravity
-import android.view.View.GONE
 
-import android.widget.FrameLayout
 import android.widget.Toast
-import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
-import com.google.android.gms.maps.model.LatLng
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.orangecoffeeapp.ui.admin.AdminMainActivity
-import com.orangecoffeeapp.utils.admission.NavigateToActivity
-import kotlinx.android.synthetic.main.activity_admin_main.view.*
+import com.orangecoffeeapp.ui.viewmodels.CarViewModel
 
 
 @AndroidEntryPoint
@@ -42,7 +29,7 @@ class AddInventoryFragment : Fragment() {
 
    private lateinit var currCar:CarModel
 
-    private val addCarViewModel:AddCarViewModel by viewModels()
+    private val carViewModel: CarViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,7 +53,7 @@ class AddInventoryFragment : Fragment() {
                 val latitude = args.getDouble("latitude")
                 val longitude = args.getDouble("longitude")
 
-                addCarViewModel.addCar(
+                carViewModel.addCar(
                     CarModel(
                         carName = carName,
                         address = carAddress,
@@ -87,9 +74,9 @@ class AddInventoryFragment : Fragment() {
 
 
     private fun subscribeObserver() {
-        addCarViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
+        carViewModel.getCarStates().observe(viewLifecycleOwner, { result ->
             when (result){
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     DisplayToast("DONE!")
                     requireActivity().finish()
@@ -97,10 +84,10 @@ class AddInventoryFragment : Fragment() {
                     startActivity(intent)
                     //dismiss()
                 }
-                is AdmissionState.Loading -> {
+                is DataState.Loading -> {
                     displayProgressbar(true)
                 }
-                is AdmissionState.Error -> {
+                is DataState.Error -> {
                     displayProgressbar(false)
                     when (result.e) {
                         ErrorMessage.ERROR_INVENTORY_IS_EMPTY -> {

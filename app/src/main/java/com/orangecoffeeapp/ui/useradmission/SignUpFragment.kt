@@ -15,8 +15,9 @@ import com.orangecoffeeapp.databinding.FragmentSignUpBinding
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.UserTypes
+import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
 import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.utils.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -60,17 +61,17 @@ class SignUpFragment : Fragment() {
     private fun subscribeObserver() {
         admissionViewModel.getUserStates().observe(viewLifecycleOwner, { result ->
             when(result) {
-                is AdmissionState.Success -> {
+                is DataState.Success -> {
                     displayProgressbar(false)
                     requireActivity().finish()
                     UserSharedPreferenceManager(requireActivity()).saveSharedPreferenceData(result.data)
                    // findNavController().navigate(R.id.action_signUpFragment_to_adminHomeFragment)
 
                 }
-                is AdmissionState.Loading->{
+                is DataState.Loading->{
                     displayProgressbar(true)
                 }
-                is AdmissionState.Error->{
+                is DataState.Error->{
                     when(result.e){
                         ErrorMessage.ERROR_EMPTY_FNAME_MSG -> {
                             signInBinding.signUpFNameTxt.error = result.e

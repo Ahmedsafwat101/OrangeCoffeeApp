@@ -11,7 +11,8 @@ import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.FakeAdmissionRepositoryImplTest
 import com.orangecoffeeapp.getOrAwaitValueTest
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
+import com.orangecoffeeapp.utils.DataState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -53,7 +54,7 @@ class AdmissionViewModelTest {
 
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
-        assertThat(value).isEqualTo(AdmissionState.Success(user))
+        assertThat(value).isEqualTo(DataState.Success(user))
 
     }
 
@@ -78,7 +79,7 @@ class AdmissionViewModelTest {
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
 
-        assertThat(value).isEqualTo(AdmissionState.Error(ErrorMessage.EMAIL_ALREADY_EXISTS_MSG))
+        assertThat(value).isEqualTo(DataState.Error(ErrorMessage.EMAIL_ALREADY_EXISTS_MSG))
     }
 
 
@@ -106,7 +107,7 @@ class AdmissionViewModelTest {
 
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
-        assertThat(value).isEqualTo(AdmissionState.Success(user))
+        assertThat(value).isEqualTo(DataState.Success(user))
     }
 
 
@@ -122,7 +123,7 @@ class AdmissionViewModelTest {
 
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_EMAIL_NOT_FOUND_MSG))
     }
 
 
@@ -139,7 +140,7 @@ class AdmissionViewModelTest {
 
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_PASSWORD_WRONG_MSG))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_PASSWORD_WRONG_MSG))
     }
 
 
@@ -163,7 +164,7 @@ class AdmissionViewModelTest {
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
 
-        assertThat(value).isEqualTo(AdmissionState.Success(retUser))
+        assertThat(value).isEqualTo(DataState.Success(retUser))
     }
 
 
@@ -187,7 +188,7 @@ class AdmissionViewModelTest {
         val value = admissionViewModel.getUserStates().getOrAwaitValueTest()
 
 
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_DONT_HAVE_ACCESS))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_DONT_HAVE_ACCESS))
     }
 
 

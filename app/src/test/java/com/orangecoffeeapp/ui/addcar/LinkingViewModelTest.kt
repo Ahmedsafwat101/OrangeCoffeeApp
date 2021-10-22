@@ -11,7 +11,8 @@ import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.FakeLinkingRepositoryImpTest
 import com.orangecoffeeapp.getOrAwaitValueTest
-import com.orangecoffeeapp.utils.admission.AdmissionState
+import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
+import com.orangecoffeeapp.utils.DataState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -48,7 +49,7 @@ class LinkingViewModelTest {
        ) )
         linkingViewModel.getAllOwnerTest()
         val value = linkingViewModel.getOwnersState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Success(ret))
+        assertThat(value).isEqualTo(DataState.Success(ret))
     }
 
 
@@ -56,7 +57,7 @@ class LinkingViewModelTest {
     fun `no owners are found in the db return error`(){
         linkingViewModel.getAllOwnerTestReturnErrorNoOwners()
         val value = linkingViewModel.getOwnersState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_NO_OWNERS_FOUND))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_NO_OWNERS_FOUND))
 
     }
 
@@ -65,7 +66,7 @@ class LinkingViewModelTest {
     fun `couldn't get data from  owners data from db return error`(){
         linkingViewModel.getAllOwnerTestReturnNetworkError()
         val value = linkingViewModel.getOwnersState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_NETWORK_ERROR))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_NETWORK_ERROR))
     }
 
     @Test
@@ -78,7 +79,7 @@ class LinkingViewModelTest {
         ) )
         linkingViewModel.getAllCarsTest()
         val value = linkingViewModel.getCarsState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Success(ret))
+        assertThat(value).isEqualTo(DataState.Success(ret))
     }
 
 
@@ -86,7 +87,7 @@ class LinkingViewModelTest {
     fun `no cars are found in the db return error`(){
         linkingViewModel.getAllCarsTestReturnErrorNoCars()
         val value = linkingViewModel.getCarsState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_NO_CAR_FOUND))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_NO_CAR_FOUND))
 
     }
 
@@ -94,7 +95,7 @@ class LinkingViewModelTest {
     fun `couldn't get data from  cars data from db return error`(){
         linkingViewModel.getAllCarsTestReturnNetworkError()
         val value = linkingViewModel.getCarsState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_NETWORK_ERROR))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_NETWORK_ERROR))
     }
 
     @Test
@@ -117,7 +118,7 @@ class LinkingViewModelTest {
         )
         linkingViewModel.linkTest(owner,car)
         val value = linkingViewModel.getLinkingState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Success(true))
+        assertThat(value).isEqualTo(DataState.Success(true))
     }
 
 
@@ -141,7 +142,7 @@ class LinkingViewModelTest {
         )
         linkingViewModel.linkTest(owner,car)
         val value = linkingViewModel.getLinkingState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_OWNER_OR_CAR_NOT_EXISTS))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_OWNER_OR_CAR_NOT_EXISTS))
     }
 
 
@@ -165,7 +166,7 @@ class LinkingViewModelTest {
         )
         linkingViewModel.linkTest(owner,car)
         val value = linkingViewModel.getLinkingState().getOrAwaitValueTest()
-        assertThat(value).isEqualTo(AdmissionState.Error(ERROR_OWNER_OR_CAR_NOT_EXISTS))
+        assertThat(value).isEqualTo(DataState.Error(ERROR_OWNER_OR_CAR_NOT_EXISTS))
     }
 
     //linkTestReturnNetworkError

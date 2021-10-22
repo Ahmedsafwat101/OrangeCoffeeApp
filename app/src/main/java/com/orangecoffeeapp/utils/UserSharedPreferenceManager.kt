@@ -13,6 +13,7 @@ class UserSharedPreferenceManager(context: Context) {
     fun saveSharedPreferenceData(data: UserModel){
         editor.apply {
             putString("fName", data.firstName)
+            putString("carID",data.carID)
             putString("lName", data.lastName)
             putString("email", data.email)
             putString("password", data.password)
@@ -62,6 +63,7 @@ class UserSharedPreferenceManager(context: Context) {
             lastName = userSharedPref.getString("lName", null).toString(),
             email = userSharedPref.getString("email", null).toString(),
             phone = userSharedPref.getString("phone", null).toString(),
+            carID=userSharedPref.getString("carID",null).toString(),
             access = userSharedPref.getBoolean("access", false),
             type = userSharedPref.getString("type", null).toString(),
             password = userSharedPref.getString("password", null).toString(),

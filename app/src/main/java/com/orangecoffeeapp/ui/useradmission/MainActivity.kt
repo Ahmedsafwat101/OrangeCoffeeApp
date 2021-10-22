@@ -11,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity"
-    lateinit var userSharedPref: UserSharedPreferenceManager
+    private lateinit var userSharedPref: UserSharedPreferenceManager
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -22,16 +22,8 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
 
 
-         checkSharedPreference()
+        checkSharedPreference()
     }
-
-    /*override fun onResume() {
-        super.onResume()
-        if (ExitHelper.isExitFlagRaised) {
-           // ExitHelper.isExitFlagRaised = true
-            finish()
-        }
-    }*/
 
     private fun checkSharedPreference(){
         userSharedPref = UserSharedPreferenceManager(applicationContext)

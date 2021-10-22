@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/owner_nav"
+    app:startDestination="@id/ownerHomeFragment">
+
+    <fragment
+        android:id="@+id/ownerHomeFragment"
+        android:name="com.orangecoffeeapp.ui.owner.OwnerHomeFragment"
+        android:label="fragment_owner_home"
+        tools:layout="@layout/fragment_owner_home" >
+
+        <action
+            android:id="@+id/action_ownerHomeFragment_to_menuSetUpFragment"
+            app:destination="@id/menuSetUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/menuSetUpFragment"
+        android:name="com.orangecoffeeapp.ui.owner.MenuSetUpFragment"
+        android:label="fragment_menu_set_up"
+        tools:layout="@layout/fragment_menu_set_up" />
+</navigation>
