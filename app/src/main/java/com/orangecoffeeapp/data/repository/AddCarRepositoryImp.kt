@@ -4,10 +4,7 @@ import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.models.MenuItemModel
-import com.orangecoffeeapp.data.models.UserModel
-import com.orangecoffeeapp.utils.Hashing
 import kotlinx.coroutines.tasks.await
-import java.lang.Exception
 import javax.inject.Inject
 
 class AddCarRepositoryImp @Inject constructor(private val db: FirebaseFirestore) :

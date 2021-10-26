@@ -12,7 +12,7 @@ import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentAdminAddNewOwnerBinding
 import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.view.*

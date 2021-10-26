@@ -8,14 +8,19 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     android:layout_marginTop="10dp"
-    android:clickable="true"
     android:backgroundTint="@color/Beige_200"
-    app:cardPreventCornerOverlap="false">
+    app:cardPreventCornerOverlap="false"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp">
+
+
         <ImageView
             android:id="@+id/cardImage"
             android:layout_width="100dp"
@@ -23,11 +28,9 @@
             android:src="@drawable/coffeecup"
             android:padding="8dp"/>
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/coffeeName"
@@ -64,11 +67,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
-
-
         </androidx.constraintlayout.widget.ConstraintLayout>
-
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 

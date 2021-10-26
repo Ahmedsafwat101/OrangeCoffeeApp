@@ -1,14 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parent"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.customer.CutomerMenuFragment">
+    tools:context=".ui.customer.CustomerMenuFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ProgressBar
+        android:id="@+id/progress_circular"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|center_vertical"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/Brown_400"
+        android:indeterminateTintMode="src_atop"
+        android:visibility="gone" />
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/counterTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_bold"
+                android:textColor="@color/blue_700"
+                android:layout_marginTop="@dimen/margin_large"
+                android:textSize="24sp"
+
+                android:translationZ="180dp"
+                app:layout_constraintBottom_toBottomOf="@+id/cartBtn"
+                app:layout_constraintEnd_toEndOf="@+id/cartBtn"
+                app:layout_constraintStart_toStartOf="@+id/cartBtn"
+                app:layout_constraintTop_toTopOf="@+id/cartBtn" />
+
+
+            <TextView
+                android:id="@+id/menuTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_normal"
+                android:fontFamily="@font/nunito_bold"
+                android:text="@string/menu"
+                android:textColor="@color/Brown_400"
+                android:textSize="32sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageButton
+                android:id="@+id/cartBtn"
+                style="@style/CustomButton"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_margin="@dimen/margin_medium"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cart"
+                app:backgroundTint="@color/Brown_400"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                android:id="@+id/swipeContainer"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                app:layout_constraintBottom_toTopOf="@+id/cartBtn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/menuTxt">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/menuRecView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_marginBottom="@dimen/margin_medium"
+                    android:layout_weight="1" />
+
+            </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

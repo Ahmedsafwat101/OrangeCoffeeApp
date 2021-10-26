@@ -1,6 +1,7 @@
 package com.orangecoffeeapp.utils
 
 import com.google.common.truth.Truth
+import com.orangecoffeeapp.utils.admission.ASEEncryption
 import org.junit.Test
 
 class ASEEncryptionTest{

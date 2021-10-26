@@ -12,7 +12,7 @@ import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.databinding.LinkedRecyclerItemBinding
 import com.orangecoffeeapp.databinding.RecyclerItemBinding
 
-class LinkedRecyclerAdapter(private val onItemListener: OnItemListener) :
+class LinkedRecyclerAdapter(var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var linkedCarsWithOwners = ArrayList<LinkedCarsWithOwners>()
@@ -32,7 +32,11 @@ class LinkedRecyclerAdapter(private val onItemListener: OnItemListener) :
         }
 
         holder.itemView.setOnClickListener {
-            onItemListener.onItemClicked(position)
+            onClick(position)
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongClick(position)
+            return@setOnLongClickListener true
         }
 
     }
@@ -62,10 +66,6 @@ class LinkedRecyclerAdapter(private val onItemListener: OnItemListener) :
 
     fun submitList(linkedList: List<LinkedCarsWithOwners>) {
         linkedCarsWithOwners = linkedList as ArrayList<LinkedCarsWithOwners>
-    }
-
-    interface OnItemListener {
-        fun onItemClicked(position: Int)
     }
 
 }

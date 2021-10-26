@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.utils
+package com.orangecoffeeapp.utils.common
 
 sealed class DataState<out T> {
     //Success

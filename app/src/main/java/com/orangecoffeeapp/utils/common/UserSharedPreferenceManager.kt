@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.utils
+package com.orangecoffeeapp.utils.common
 
 import android.content.Context
 import com.orangecoffeeapp.data.models.UserModel

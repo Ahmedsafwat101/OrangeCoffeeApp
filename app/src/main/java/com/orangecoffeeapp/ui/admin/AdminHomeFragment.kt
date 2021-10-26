@@ -19,12 +19,12 @@ import com.orangecoffeeapp.databinding.FragmentAdminHomeBinding
 import com.orangecoffeeapp.ui.adapters.LinkedRecyclerAdapter
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class AdminHomeFragment : Fragment(),LinkedRecyclerAdapter.OnItemListener {
+class AdminHomeFragment : Fragment() {
     private  val TAG = "AdminHomeFragment"
     private lateinit var linkedAdapter: LinkedRecyclerAdapter
     private lateinit var homeBinding: FragmentAdminHomeBinding
@@ -105,7 +105,7 @@ class AdminHomeFragment : Fragment(),LinkedRecyclerAdapter.OnItemListener {
         homeBinding.linkedRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-            linkedAdapter = LinkedRecyclerAdapter(this@AdminHomeFragment)
+            linkedAdapter = LinkedRecyclerAdapter(::onItemClicked)
             this.adapter = linkedAdapter
         }
         addCarsDataSet()
@@ -127,7 +127,7 @@ class AdminHomeFragment : Fragment(),LinkedRecyclerAdapter.OnItemListener {
         }
     }
 
-    override fun onItemClicked(position: Int) {
+    private fun onItemClicked(position: Int) {
         val currItem = linkedData[position]
         val bundle = Bundle()
         bundle.putString("carName",currItem.carModel.carName)

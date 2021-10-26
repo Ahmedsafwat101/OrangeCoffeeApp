@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui.addcar
+package com.orangecoffeeapp.ui.admin.addcar
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth.assertThat
@@ -12,7 +12,7 @@ import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.FakeLinkingRepositoryImpTest
 import com.orangecoffeeapp.getOrAwaitValueTest
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

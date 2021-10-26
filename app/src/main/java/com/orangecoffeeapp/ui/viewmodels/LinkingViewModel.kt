@@ -11,7 +11,7 @@ import com.orangecoffeeapp.data.models.MenuItemModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.LinkingRepository
 import com.orangecoffeeapp.utils.addcar.LinkFormValidation.validateLinkForm
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import com.orangecoffeeapp.utils.owner.AddMenuItemsUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

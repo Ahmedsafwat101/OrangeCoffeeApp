@@ -8,7 +8,10 @@
     app:cardCornerRadius="8dp"
     app:cardElevation="10dp"
     android:layout_marginTop="10dp"
+    android:backgroundTint="@color/gray_200"
+    android:foreground="?android:attr/selectableItemBackground"
     android:clickable="true"
+    android:focusable="true"
     app:cardPreventCornerOverlap="false">
 
     <LinearLayout
@@ -28,6 +31,7 @@
             android:layout_height="wrap_content"
             android:textSize="24sp"
             android:textColor="@color/Brown_400"
+            android:fontFamily="@font/nunito_bold"
             android:text="CoffeeShop Abo Nesma"
             android:singleLine="true"
             android:maxLines="1"

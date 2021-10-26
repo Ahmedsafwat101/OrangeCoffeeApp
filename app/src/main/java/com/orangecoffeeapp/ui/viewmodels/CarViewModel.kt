@@ -1,6 +1,5 @@
 package com.orangecoffeeapp.ui.viewmodels
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.orangecoffeeapp.constants.ErrorMessage
@@ -9,8 +8,8 @@ import com.orangecoffeeapp.data.models.MenuItemModel
 import com.orangecoffeeapp.data.repository.AddCarRepository
 import com.orangecoffeeapp.utils.addcar.AddCarFormUtils
 import com.orangecoffeeapp.utils.addcar.AddInventoryUtils
-import com.orangecoffeeapp.utils.DataState
-import com.orangecoffeeapp.utils.SingleLiveEvent
+import com.orangecoffeeapp.utils.common.DataState
+import com.orangecoffeeapp.utils.common.SingleLiveEvent
 import com.orangecoffeeapp.utils.owner.AddMenuItemsUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

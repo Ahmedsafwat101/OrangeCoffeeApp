@@ -1,8 +1,7 @@
-package com.orangecoffeeapp.utils
+package com.orangecoffeeapp.utils.common
 
 import android.content.Context
 import android.content.SharedPreferences
-import com.google.android.gms.maps.model.LatLng
 import com.orangecoffeeapp.data.models.CarModel
 
 class CarSharedPreferenceManager(context: Context) {

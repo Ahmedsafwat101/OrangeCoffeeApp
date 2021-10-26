@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="cart">عربة التسوق</string>
+    <string name="checkout">الدفع</string>
+    <string name="menu">قائمة المشروبات</string>
+    <string name="total">"السعر : "</string>
+    <string name="menu_home">الرئيسية</string>
+    <string name="orders">الطلبات</string>
+    <string name="gps_meg">" ياعم انا عمدة افتح الموقع"</string>
+    <string name="yes">ايوه يا عم</string>
+    <string name="No">لا لا لا</string>
+</resources>

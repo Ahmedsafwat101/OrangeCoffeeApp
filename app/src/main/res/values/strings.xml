@@ -1,28 +1,38 @@
 <resources>
-    <string name="app_name">MyCoffeeApp</string>
-    <string name="email">Email</string>
-    <string name="password">Password</string>
-    <string name="login">LogIn</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="first_name">First Name</string>
-    <string name="phone_number">Phone Number</string>
-    <string name="signup">SignUp</string>
-    <string name="update">Update</string>
-    <string name="title_activity_admin_main">AdminMainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+    <!-- TODO: Remove or change this placeholder text -->
+
+    <string name="app_name" translatable="false">MyCoffeeApp</string>
+    <string name="email" translatable="false">Email</string>
+    <string name="password" translatable="false">Password</string>
+    <string name="login" translatable="false">LogIn</string>
+    <string name="first_name" translatable="false">First Name</string>
+    <string name="phone_number" translatable="false">Phone Number</string>
+    <string name="signup" translatable="false">SignUp</string>
+    <string name="update" translatable="false">Update</string>
+    <string name="title_activity_admin_main" translatable="false">AdminMainActivity</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
+    <string name="action_settings" translatable="false">Settings</string>
     <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="dropped_pin">Pin</string>
-    <string name="google_map_api_key">AIzaSyCWZPdCn32rWzao5d5Mzb3pHJ0lewuJaXY</string>
-    <string name="car_name">Car Name</string>
+    <string name="menu_gallery" translatable="false">Gallery</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="dropped_pin" translatable="false">Pin</string>
+    <string name="google_map_api_key" translatable="false">AIzaSyCWZPdCn32rWzao5d5Mzb3pHJ0lewuJaXY</string>
+    <string name="car_name" translatable="false">Car Name</string>
+    <string name="cart">Cart</string>
+    <string name="checkout">CheckOut</string>
+    <string name="menu">Menu</string>
+    <string name="total">Total :</string>
+    <string name="orders">Orders</string>
+    <string name="gps_meg">Your GPS seems to be disabled, Open the location</string>
+    <string name="yes">Yes</string>
+    <string name="No">No</string>
 
 
 </resources>

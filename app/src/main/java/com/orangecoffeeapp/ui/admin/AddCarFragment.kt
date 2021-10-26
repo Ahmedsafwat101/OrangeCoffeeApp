@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui.addcar
+package com.orangecoffeeapp.ui.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.databinding.FragmentAddCarBinding
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
 import com.orangecoffeeapp.ui.viewmodels.CarViewModel
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,8 +45,6 @@ class AddCarFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         subscribeObserver()
-
-
 
         addCarBinding.addCarBtn.setOnClickListener {
             // If valid input return NONE

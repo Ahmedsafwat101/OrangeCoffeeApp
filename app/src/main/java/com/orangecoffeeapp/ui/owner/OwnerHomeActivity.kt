@@ -33,44 +33,19 @@ class OwnerHomeActivity : AppCompatActivity() {
         bottomNavigation.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener { _, destination, _ ->
-            /* when (destination.id) {
-                 R.id.mapFragment2 -> {
+             when (destination.id) {
+                 R.id.menuSetUpFragment -> {
                      supportActionBar?.hide()
                      hideBottomNav()
-                 }
-                 R.id.addInventoryFragment2 -> {
-                     supportActionBar?.hide()
-                     hideBottomNav()
-                 }
-                 R.id.HomeFragment -> {
-                     supportActionBar?.show()
-                     showBottomNav()
-                 }
-                 R.id.addCarFragment2 -> {
-                     supportActionBar?.hide()
-                     showBottomNav()
-                 }
-                 R.id.linkingFragment -> {
-                     supportActionBar?.hide()
-                     showBottomNav()
-                 }
-                 R.id.analyticsFragment -> {
-                     supportActionBar?.hide()
-                     showBottomNav()
-                 }
-                 R.id.addNewCarFragment -> {
-                     supportActionBar?.hide()
-                     showBottomNav()
                  }
                  else -> hideBottomNav()
-             }*/
+             }
         }
 
 
     }
 
     private fun showBottomNav() {
-
         bottomNavigation.visibility = View.VISIBLE
     }
 

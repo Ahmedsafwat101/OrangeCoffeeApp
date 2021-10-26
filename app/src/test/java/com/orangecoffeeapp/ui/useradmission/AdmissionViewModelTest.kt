@@ -12,7 +12,7 @@ import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.FakeAdmissionRepositoryImplTest
 import com.orangecoffeeapp.getOrAwaitValueTest
 import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

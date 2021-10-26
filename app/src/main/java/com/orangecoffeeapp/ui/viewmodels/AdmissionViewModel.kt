@@ -9,7 +9,7 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_DONT_HAVE_ACCESS
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.data.repository.AdmissionRepository
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import com.orangecoffeeapp.utils.admission.LoginFormUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

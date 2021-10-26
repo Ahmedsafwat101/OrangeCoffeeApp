@@ -18,16 +18,10 @@ import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentOwnerHomeBinding
 import com.orangecoffeeapp.ui.adapters.CarMenuAdapter
 import com.orangecoffeeapp.ui.viewmodels.CarViewModel
-import com.orangecoffeeapp.utils.Helper
-import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DisplayHelper
+import com.orangecoffeeapp.utils.common.UserSharedPreferenceManager
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.appcompat.app.AppCompatActivity
-
-import android.app.DownloadManager
-
-
-
 
 
 @AndroidEntryPoint
@@ -41,10 +35,6 @@ class OwnerHomeFragment : Fragment() {
     private lateinit var ownerHomeBinding: FragmentOwnerHomeBinding
     private var currCar: CarModel? = null
 
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
 
 
     override fun onCreateView(
@@ -82,17 +72,15 @@ class OwnerHomeFragment : Fragment() {
 
             when (result) {
                 is DataState.Success -> {
-                    Helper.displayProgressbar(false, ownerHomeBinding.progressCircular)
+                    DisplayHelper.displayProgressbar(false, ownerHomeBinding.progressCircular)
                     currCar = result.data
                     menuData = result.data.menuItems
                     initRecyclerView()
                     ownerHomeBinding.addMenuItemBtn.visibility = View.VISIBLE
-
-
                 }
                 is DataState.OperationWithFeedback -> {
-                    Helper.displayProgressbar(false, ownerHomeBinding.progressCircular)
-                    Helper.displaySnack(
+                    DisplayHelper.displayProgressbar(false, ownerHomeBinding.progressCircular)
+                    DisplayHelper.displaySnack(
                         ErrorMessage.ERROR_CAR_DONT_HAVE_MENU,
                         ownerHomeBinding.parent
                     )
@@ -101,11 +89,11 @@ class OwnerHomeFragment : Fragment() {
 
                 }
                 is DataState.Loading -> {
-                    Helper.displayProgressbar(true, ownerHomeBinding.progressCircular)
+                    DisplayHelper.displayProgressbar(true, ownerHomeBinding.progressCircular)
                 }
                 is DataState.Error -> {
-                    Helper.displayProgressbar(false, ownerHomeBinding.progressCircular)
-                    Helper.displaySnack(result.e, ownerHomeBinding.parent)
+                    DisplayHelper.displayProgressbar(false, ownerHomeBinding.progressCircular)
+                    DisplayHelper.displaySnack(result.e, ownerHomeBinding.parent)
                     Log.d("here", "Error ${result.e}")
                     ownerHomeBinding.addMenuItemBtn.visibility = View.VISIBLE
 
@@ -129,6 +117,7 @@ class OwnerHomeFragment : Fragment() {
         }
         addCarsDataSet()
     }
+
 
     private fun addCarsDataSet() {
         menuAdapter.submitList(menuData)

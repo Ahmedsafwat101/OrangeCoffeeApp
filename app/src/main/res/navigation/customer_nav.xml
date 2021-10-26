@@ -9,10 +9,49 @@
         android:id="@+id/customerHomeFragment"
         android:name="com.orangecoffeeapp.ui.customer.CustomerHomeFragment"
         android:label="fragment_customer_home"
-        tools:layout="@layout/fragment_customer_home" />
+        tools:layout="@layout/fragment_customer_home" >
+        <action
+            android:id="@+id/action_customerHomeFragment_to_customerMenuFragment"
+            app:destination="@id/customerMenuFragment" />
+    </fragment>
     <fragment
         android:id="@+id/customerOrdersFragment"
         android:name="com.orangecoffeeapp.ui.customer.CustomerOrdersFragment"
         android:label="fragment_customer_orders"
         tools:layout="@layout/fragment_customer_orders" />
+    <fragment
+        android:id="@+id/customerMenuFragment"
+        android:name="com.orangecoffeeapp.ui.customer.CustomerMenuFragment"
+        android:label="fragment_cutomer_menu"
+        tools:layout="@layout/fragment_cutomer_menu" >
+        <action
+            android:id="@+id/action_customerMenuFragment_to_checkOutFragment"
+            app:destination="@id/checkOutFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/checkOutFragment"
+        android:name="com.orangecoffeeapp.ui.customer.CheckOutFragment"
+        android:label="fragment_check_out"
+        tools:layout="@layout/fragment_check_out" >
+        <action
+            android:id="@+id/action_checkOutFragment_to_customerHomeFragment"
+            app:destination="@id/customerHomeFragment"
+            app:popUpTo="@+id/customerHomeFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_checkOutFragment_to_navigationFragment"
+            app:destination="@id/navigationFragment"
+            />
+    </fragment>
+    <fragment
+        android:id="@+id/navigationFragment"
+        android:name="com.orangecoffeeapp.ui.customer.NavigationFragment"
+        android:label="fragment_navigation"
+        tools:layout="@layout/fragment_navigation" >
+        <action
+            android:id="@+id/action_navigationFragment_to_customerHomeFragment"
+            app:destination="@id/customerHomeFragment"
+            app:popUpTo="@+id/customerHomeFragment"
+            app:popUpToInclusive="true"/>
+    </fragment>
 </navigation>

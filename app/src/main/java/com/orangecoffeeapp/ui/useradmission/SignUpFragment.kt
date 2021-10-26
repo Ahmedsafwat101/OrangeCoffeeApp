@@ -16,8 +16,8 @@ import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.constants.UserTypes
 import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
-import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.UserSharedPreferenceManager
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

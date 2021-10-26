@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui.addcar
+package com.orangecoffeeapp.ui.admin
 
 import android.os.Bundle
 import android.view.LayoutInflater

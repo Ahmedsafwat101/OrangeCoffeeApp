@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui.addcar
+package com.orangecoffeeapp.ui.admin
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -21,12 +21,11 @@ import com.orangecoffeeapp.ui.adapters.CarRecyclerAdapter
 import com.orangecoffeeapp.ui.adapters.OwnerRecyclerAdapter
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
-    OwnerRecyclerAdapter.OnOwnerItemListener {
+class LinkingFragment : Fragment(){
     private val TAG = "LinkingFragment"
 
     private lateinit var ownerAdapter: OwnerRecyclerAdapter
@@ -189,7 +188,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
         linkingBinding.ownerRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-            ownerAdapter = OwnerRecyclerAdapter(this@LinkingFragment)
+            ownerAdapter = OwnerRecyclerAdapter(::onOwnerItemClicked,::onOwnerItemClickedShowDetails)
             this.adapter = ownerAdapter
         }
         addOwnerDataSet()
@@ -205,7 +204,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
         linkingBinding.carsRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-            carAdapter = CarRecyclerAdapter(this@LinkingFragment)
+            carAdapter = CarRecyclerAdapter(::onCarItemClicked,::onCarItemClickedShowDetails)
             this.adapter = carAdapter
         }
         addCarsDataSet()
@@ -216,27 +215,26 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
         carAdapter.submitList(carsData)
     }
 
-
-    override fun onCarItemClicked(position: Int) {
+    private fun onCarItemClicked(position: Int){
         currSelectedCar = carsData[position]
         currCarPos = position
-       linkingBinding.coffeeCarTxt.setText(carsData[position].carName)
+        linkingBinding.coffeeCarTxt.setText(carsData[position].carName)
     }
 
-    override fun onCarItemClickedShowDetails(position: Int) {
+    private fun onCarItemClickedShowDetails(position: Int) {
         val bundle = Bundle()
         bundle.putString("name",carsData[position].carName)
         bundle.putString("address",carsData[position].address)
         findNavController().navigate(R.id.action_linkingFragment_to_carDetailsFragment,bundle)
     }
 
-    override fun onOwnerItemClicked(position: Int) {
+    private fun onOwnerItemClicked(position: Int) {
         currSelectedOwner = ownersData[position]
         currOwnerPos = position
         linkingBinding.ownerTxt.setText(ownersData[position].email)
     }
 
-    override fun onOwnerItemClickedShowDetails(position: Int) {
+    private fun onOwnerItemClickedShowDetails(position: Int) {
         val bundle = Bundle()
         bundle.putString("name",ownersData[position].firstName+" "+ownersData[position].lastName)
         bundle.putString("email",ownersData[position].email)
@@ -244,6 +242,7 @@ class LinkingFragment : Fragment(), CarRecyclerAdapter.OnCarItemListener,
 
         findNavController().navigate(R.id.action_linkingFragment_to_ownerDetailsFragment,bundle)
     }
+
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

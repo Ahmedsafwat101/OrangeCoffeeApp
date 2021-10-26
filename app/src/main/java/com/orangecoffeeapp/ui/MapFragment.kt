@@ -2,17 +2,14 @@ package com.orangecoffeeapp.ui
 
 import android.Manifest
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.location.Address
 import android.location.Geocoder
 import android.os.Bundle
-import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.VISIBLE
 import android.view.ViewGroup
-import android.widget.SearchView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -29,10 +26,7 @@ import com.orangecoffeeapp.R
 import com.orangecoffeeapp.databinding.FragmentMapBinding
 import java.io.IOException
 import java.util.*
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import com.orangecoffeeapp.ui.addcar.AddCarFragment
 
 
 class MapFragment : Fragment(), OnMapReadyCallback {
@@ -43,8 +37,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     lateinit var map: GoogleMap
     private val REQUEST_LOCATION_PERMISSION = 1
     private var currLatLng: LatLng = LatLng(0.0, 0.0)
-
-
 
 
     override fun onCreateView(
@@ -221,7 +213,6 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 //    ActivityCompat#requestPermissions
                 // here to request the missing permissions, and then overriding
                 /*fun onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults){
-
                 }*/
                 return
             }

@@ -22,8 +22,8 @@ import com.orangecoffeeapp.constants.ErrorMessage.ERROR_PASSWORD_LENGTH_LESS_THA
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.databinding.FragmentLogInBinding
 import com.orangecoffeeapp.ui.viewmodels.AdmissionViewModel
-import com.orangecoffeeapp.utils.UserSharedPreferenceManager
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.UserSharedPreferenceManager
+import com.orangecoffeeapp.utils.common.DataState
 import com.orangecoffeeapp.utils.admission.NavigateToActivity
 
 @AndroidEntryPoint

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_marginLeft="@dimen/margin_normal"
     android:layout_marginRight="@dimen/margin_normal"
-    tools:context=".ui.addcar.LinkingFragment">
+    tools:context="com.orangecoffeeapp.ui.admin.LinkingFragment">
 
     <FrameLayout
         android:layout_width="match_parent"

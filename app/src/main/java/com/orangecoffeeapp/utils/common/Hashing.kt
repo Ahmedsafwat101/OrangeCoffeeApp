@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.utils
+package com.orangecoffeeapp.utils.common
 
 import java.security.MessageDigest
 

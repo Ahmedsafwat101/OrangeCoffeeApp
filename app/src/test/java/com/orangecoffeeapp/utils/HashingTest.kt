@@ -1,6 +1,7 @@
 package com.orangecoffeeapp.utils
 
 import com.google.common.truth.Truth.assertThat
+import com.orangecoffeeapp.utils.common.Hashing
 import org.junit.Test
 
 class HashingTest{

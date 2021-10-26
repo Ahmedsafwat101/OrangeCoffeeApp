@@ -11,7 +11,7 @@ import com.orangecoffeeapp.constants.Constants.OWNER_IMG_URL
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.RecyclerItemBinding
 
-class OwnerRecyclerAdapter(private val onOwnerItemListener: OnOwnerItemListener ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OwnerRecyclerAdapter(var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var owners = ArrayList<UserModel>()
 
@@ -27,15 +27,14 @@ class OwnerRecyclerAdapter(private val onOwnerItemListener: OnOwnerItemListener 
         when (holder) {
             is OwnerViewHolder -> holder.bind(owners[position])
         }
-        holder.itemView.setOnClickListener {
-            onOwnerItemListener.onOwnerItemClicked(position)
-        }
 
+        holder.itemView.setOnClickListener {
+            onClick(position)
+        }
         holder.itemView.setOnLongClickListener {
-            onOwnerItemListener.onOwnerItemClickedShowDetails(position)
+            onLongClick(position)
             return@setOnLongClickListener true
         }
-
 
     }
 

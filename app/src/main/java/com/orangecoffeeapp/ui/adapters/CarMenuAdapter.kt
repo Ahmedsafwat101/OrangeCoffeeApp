@@ -12,7 +12,8 @@ import com.orangecoffeeapp.constants.Constants
 import com.orangecoffeeapp.data.models.MenuItemModel
 import com.orangecoffeeapp.databinding.RecyclerMenuItemBinding
 
-class CarMenuAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CarMenuAdapter (var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+
 
     private var menu = ArrayList<MenuItemModel>()
 
@@ -29,6 +30,14 @@ class CarMenuAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is MenuViewHolder -> holder.bind(menu[position])
         }
 
+        holder.itemView.setOnClickListener {
+            onClick(position)
+        }
+        holder.itemView.setOnLongClickListener {
+            onLongClick(position)
+            return@setOnLongClickListener true
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -42,7 +51,7 @@ class CarMenuAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         fun bind(menu: MenuItemModel) {
 
             binding.coffeeName.text = menu.coffeeName
-            binding.coffeePrice.text = menu.price.toString()+" $"
+            binding.coffeePrice.text = menu.price.toString()+" EG"
 
             /*if(menu.available){
                 binding.logInBtn.setBackgroundColor(Color.GREEN)
@@ -67,7 +76,10 @@ class CarMenuAdapter(): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     fun submitList(menuList: List<MenuItemModel>) {
         menu = menuList as ArrayList<MenuItemModel>
+        notifyDataSetChanged()
+
     }
+
 
 
 }

@@ -1,9 +1,7 @@
 package com.orangecoffeeapp.data.repository
 
-import com.google.android.gms.maps.model.LatLng
 import com.orangecoffeeapp.data.models.CarModel
-import com.orangecoffeeapp.data.models.UserModel
-import com.orangecoffeeapp.utils.Hashing
+import com.orangecoffeeapp.data.models.MenuItemModel
 
 class FakeAddCarRepositoryTest:AddCarRepository {
 
@@ -25,11 +23,16 @@ class FakeAddCarRepositoryTest:AddCarRepository {
         return null
     }
 
+    override suspend fun getCar(carNam: String): CarModel? {
+        TODO("Not yet implemented")
+    }
+
     override suspend fun removeCar(car: CarModel): CarModel? {
         TODO("Not yet implemented")
     }
 
-    override suspend fun updateCar(car: CarModel): CarModel? {
+    override suspend fun updateCarMenu(car: CarModel, menuItem: MenuItemModel): CarModel? {
         TODO("Not yet implemented")
     }
+
 }

@@ -23,6 +23,8 @@ object RepositoryModule {
     @Provides
     fun provideOwnerRepository(db:FirebaseFirestore) = LinkingRepositoryImp(db) as LinkingRepository
 
-
+    @Singleton
+    @Provides
+    fun provideOrderRepository(db:FirebaseFirestore) = OrderRepositoryImp(db) as OrderRepository
 
 }

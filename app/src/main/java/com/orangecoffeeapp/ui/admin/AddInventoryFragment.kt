@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.ui.addcar
+package com.orangecoffeeapp.ui.admin
 
 import android.content.Intent
 import android.os.Bundle
@@ -11,15 +11,14 @@ import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.ErrorMessage
 import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.models.InventoryItemModel
-import com.orangecoffeeapp.utils.CarSharedPreferenceManager
-import com.orangecoffeeapp.utils.DataState
+import com.orangecoffeeapp.utils.common.CarSharedPreferenceManager
+import com.orangecoffeeapp.utils.common.DataState
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_add_inventory.*
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.orangecoffeeapp.ui.admin.AdminMainActivity
 import com.orangecoffeeapp.ui.viewmodels.CarViewModel
 
 

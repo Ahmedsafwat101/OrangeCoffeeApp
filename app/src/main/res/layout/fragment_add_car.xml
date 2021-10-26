@@ -7,7 +7,7 @@
     android:fillViewport="true"
     android:orientation="vertical"
     android:screenOrientation="portrait"
-    tools:context=".ui.addcar.AddCarFragment">
+    tools:context="com.orangecoffeeapp.ui.admin.AddCarFragment">
 
     <FrameLayout
         android:id="@+id/parent"

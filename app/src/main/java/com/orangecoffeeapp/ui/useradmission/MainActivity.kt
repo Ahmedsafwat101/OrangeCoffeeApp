@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.ActionBar
 import com.orangecoffeeapp.R
-import com.orangecoffeeapp.utils.UserSharedPreferenceManager
+import com.orangecoffeeapp.utils.common.UserSharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         val actionBar: ActionBar? = supportActionBar
         actionBar?.hide()
-
 
         checkSharedPreference()
     }
@@ -38,5 +37,7 @@ class MainActivity : AppCompatActivity() {
             )
         }
     }
+
+
 
 }

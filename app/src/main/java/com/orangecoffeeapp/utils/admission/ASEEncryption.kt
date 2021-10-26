@@ -1,4 +1,4 @@
-package com.orangecoffeeapp.utils
+package com.orangecoffeeapp.utils.admission
 
 import android.util.Base64
 import com.orangecoffeeapp.constants.Constants.IV

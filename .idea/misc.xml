@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/drawable/avalilable.xml" value="0.23646578140960164" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/drawable/bounce.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/drawable/ic_baseline_local_phone_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/drawable/ic_baseline_person_24.xml" value="0.24114583333333334" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/drawable/ic_launcher_background.xml" value="0.24114583333333334" />
@@ -34,9 +35,11 @@
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_admin_analytics.xml" value="0.15534420289855072" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_admin_home.xml" value="0.16168478260869565" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_car_details.xml" value="0.264" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_check_out.xml" value="0.1802536231884058" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_customer.xml" value="0.11956521739130435" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_customer_home.xml" value="0.16485507246376813" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_customer_orders.xml" value="0.11956521739130435" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_cutomer_menu.xml" value="0.21893491124260356" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_edit_user.xml" value="0.2" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_gallery.xml" value="0.11911231884057971" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_home.xml" value="0.11911231884057971" />
@@ -45,6 +48,7 @@
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_log_in.xml" value="0.1" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_map.xml" value="0.16666666666666666" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_menu_set_up.xml" value="0.264" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_navigation.xml" value="0.18342391304347827" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_owner_details.xml" value="0.39285714285714285" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_owner_home.xml" value="0.152" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/fragment_second.xml" value="0.11911231884057971" />
@@ -56,6 +60,7 @@
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/recycler_car_item.xml" value="0.176" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/recycler_item.xml" value="0.536" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/recycler_menu_item.xml" value="0.264" />
+        <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/layout/recycler_menu_order.xml" value="0.264" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/menu/admin_bottom_menu.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/menu/bottom_menu.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Safwat/AndroidStudioProjects/OrangeCoffeeApp/app/src/main/res/menu/customer_bottom_menu.xml" value="0.136" />

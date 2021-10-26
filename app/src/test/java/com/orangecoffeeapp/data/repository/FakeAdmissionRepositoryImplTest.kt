@@ -2,8 +2,7 @@ package com.orangecoffeeapp.data.repository
 
 import com.orangecoffeeapp.data.models.LoginFormModel
 import com.orangecoffeeapp.data.models.UserModel
-import com.orangecoffeeapp.utils.Hashing
-import org.junit.Assert.*
+import com.orangecoffeeapp.utils.common.Hashing
 
 class FakeAdmissionRepositoryImplTest : AdmissionRepository {
 

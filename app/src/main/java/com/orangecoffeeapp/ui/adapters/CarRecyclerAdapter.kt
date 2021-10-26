@@ -1,6 +1,5 @@
 package com.orangecoffeeapp.ui.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -9,11 +8,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.constants.Constants
 import com.orangecoffeeapp.data.models.CarModel
-import com.orangecoffeeapp.data.models.UserModel
-import com.orangecoffeeapp.databinding.FragmentLinkingBinding
 import com.orangecoffeeapp.databinding.RecyclerItemBinding
 
-class CarRecyclerAdapter(private val onCarItemListener:OnCarItemListener ): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CarRecyclerAdapter(var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var cars = ArrayList<CarModel>()
     private lateinit var  binding: RecyclerItemBinding
@@ -31,13 +28,12 @@ class CarRecyclerAdapter(private val onCarItemListener:OnCarItemListener ): Recy
         }
 
         holder.itemView.setOnClickListener {
-            onCarItemListener.onCarItemClicked(position)
+            onClick(position)
         }
         holder.itemView.setOnLongClickListener {
-            onCarItemListener.onCarItemClickedShowDetails(position)
+            onLongClick(position)
             return@setOnLongClickListener true
         }
-
     }
 
     override fun getItemCount(): Int {
@@ -67,11 +63,5 @@ class CarRecyclerAdapter(private val onCarItemListener:OnCarItemListener ): Recy
     fun submitList(carsList: List<CarModel>) {
         cars = carsList as ArrayList<CarModel>
     }
-
-    interface OnCarItemListener{
-        fun onCarItemClicked(position: Int)
-        fun onCarItemClickedShowDetails(position: Int)
-    }
-    //argument fun
 
 }
