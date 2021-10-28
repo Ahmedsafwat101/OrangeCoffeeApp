@@ -16,12 +16,13 @@ import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.data.models.MenuItemModel
 import com.orangecoffeeapp.data.models.Order
 import com.orangecoffeeapp.databinding.FragmentCheckOutBinding
-import com.orangecoffeeapp.ui.adapters.OrderRecyclerAdapter
+import com.orangecoffeeapp.ui.adapters.CustomerOrderAdapter
 import com.orangecoffeeapp.ui.viewmodels.OrderViewModel
 import com.orangecoffeeapp.utils.common.DataState
 import com.orangecoffeeapp.utils.common.DisplayHelper.displayProgressbar
 import com.orangecoffeeapp.utils.common.DisplayHelper.displaySnack
 import com.orangecoffeeapp.utils.common.DisplayHelper.displayToast
+import com.orangecoffeeapp.utils.common.UserSharedPreferenceManager
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,7 +33,7 @@ import kotlin.collections.HashMap
 class CheckOutFragment : Fragment() {
     private val TAG = "CheckOutFragment"
     private lateinit var checkOutBinding: FragmentCheckOutBinding
-    private lateinit var orderAdapter: OrderRecyclerAdapter
+    private lateinit var customerOrderAdapter: CustomerOrderAdapter
     private val orderViewModel: OrderViewModel by viewModels()
     private var total = 0f
     private var flag = true
@@ -60,17 +61,18 @@ class CheckOutFragment : Fragment() {
         val orders = arguments?.getSerializable("orderMap") as HashMap<MenuItemModel, Int>
 
         initRecyclerView()
-        orderAdapter.submitList(orders)
+        customerOrderAdapter.submitList(orders)
         subscribeObserver()
+        val currUser = UserSharedPreferenceManager(requireActivity()).getSharedPreferenceData()
 
         checkOutBinding.checkoutBtn.setOnClickListener {
             val currOrder = Order(
-                userID = currSelectedItem.userModel.email,
+                userID = currUser.email,
                 carName = currSelectedItem.carModel.carName,
                 date = getLocalDate(),
                 orderPrice = total,
-                orderContentKeys = orderAdapter.getMap().keys.toList(),
-                orderContentValues = orderAdapter.getMap().values.toList(),
+                orderContentKeys = customerOrderAdapter.getMap().keys.toList(),
+                orderContentValues = customerOrderAdapter.getMap().values.toList(),
                 )
 
             bundle.putSerializable("currLinkedCar",currSelectedItem)
@@ -111,14 +113,14 @@ class CheckOutFragment : Fragment() {
         checkOutBinding.orderRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-            orderAdapter =
-                OrderRecyclerAdapter(::getValues, ::getUpdatedMap, ::incrementAndDecrement)
-            this.adapter = orderAdapter
+            customerOrderAdapter =
+                CustomerOrderAdapter(::getValues, ::getUpdatedMap, ::incrementAndDecrement)
+            this.adapter = customerOrderAdapter
         }
     }
 
     private fun getValues(currItemPrice: Float) {
-        if (itemsCount < orderAdapter.itemCount) {
+        if (itemsCount < customerOrderAdapter.itemCount) {
             total += currItemPrice
             checkOutBinding.totalPriceTxt.text = total.toString()
             itemsCount++
@@ -134,7 +136,7 @@ class CheckOutFragment : Fragment() {
     }
 
     private fun getUpdatedMap(itemModel: MenuItemModel, count: Int) {
-        orderAdapter.updateMap(itemModel, count)
+        customerOrderAdapter.updateMap(itemModel, count)
     }
 
     private fun getLocalDate(): String {

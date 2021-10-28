@@ -35,6 +35,7 @@ object ErrorMessage {
     const val ERROR_CAR_NOT_EXISTS_MSG = "Car doesn't exists!"
     const val ERROR_CAR_DONT_HAVE_MENU= "Car don't have menu!"
     const val  ERROR_EMPTY_ORDER_CONTENT = "No Data to process :)"
+    const val ERROR_NO_ORDERS_FOUND = "Seems that you didn't make any order "
 
     const val NONE = "No Error"
 

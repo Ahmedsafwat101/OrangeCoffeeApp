@@ -10,7 +10,7 @@ import com.orangecoffeeapp.constants.Constants
 import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.databinding.RecyclerCarItemBinding
 
-class CustomerCarRecyclerAdapter(var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CustomerCarAdapter(var onClick: (Int)->Unit ={}, var onLongClick:(Int)-> Unit ={}): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var linkedCarsWithOwners = ArrayList<LinkedCarsWithOwners>()
 

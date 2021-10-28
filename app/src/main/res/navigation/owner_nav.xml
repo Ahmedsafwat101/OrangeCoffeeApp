@@ -20,4 +20,9 @@
         android:name="com.orangecoffeeapp.ui.owner.MenuSetUpFragment"
         android:label="fragment_menu_set_up"
         tools:layout="@layout/fragment_menu_set_up" />
+    <fragment
+        android:id="@+id/ownerOrderFragment"
+        android:name="com.orangecoffeeapp.ui.owner.OwnerOrderFragment"
+        android:label="fragment_owner_order"
+        tools:layout="@layout/fragment_owner_order" />
 </navigation>

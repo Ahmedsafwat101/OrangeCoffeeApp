@@ -7,6 +7,13 @@
     <string name="menu_home">الرئيسية</string>
     <string name="orders">الطلبات</string>
     <string name="gps_meg">" ياعم انا عمدة افتح الموقع"</string>
-    <string name="yes">ايوه يا عم</string>
-    <string name="No">لا لا لا</string>
+    <string name="yes">نعم</string>
+    <string name="No">لا</string>
+    <string name="languages">لغات</string>
+    <string name="arabic">Arabic</string>
+    <string name="english">English</string>
+    <string name="change_language">تغير اللغة</string>
+    <string name="action_settings" translatable="false">الاعدادت</string>
+    <string name="update_profile">تعديل الملف الش</string>
+
 </resources>

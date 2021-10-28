@@ -3,10 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.customer.CustomerHomeFragment"
+    tools:context=".ui.owner.OwnerOrderFragment"
     android:id="@+id/parent">
-
-
 
     <ProgressBar
         android:id="@+id/progress_circular"
@@ -16,7 +14,6 @@
         android:indeterminate="true"
         android:indeterminateTint="@color/Brown_400"
         android:indeterminateTintMode="src_atop"
-        android:translationZ="360dp"
         android:visibility="gone" />
 
     <androidx.appcompat.widget.LinearLayoutCompat
@@ -25,8 +22,9 @@
         android:orientation="vertical">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/CarsRecView"
+            android:id="@+id/ordersRecView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.appcompat.widget.LinearLayoutCompat>
+
 </FrameLayout>

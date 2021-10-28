@@ -38,6 +38,13 @@ class OwnerHomeActivity : AppCompatActivity() {
                      supportActionBar?.hide()
                      hideBottomNav()
                  }
+                 R.id.ownerHomeFragment ->{
+                     supportActionBar?.show()
+                     showBottomNav()
+                 }
+                 R.id.ownerOrderFragment ->{
+                     showBottomNav()
+                 }
                  else -> hideBottomNav()
              }
         }

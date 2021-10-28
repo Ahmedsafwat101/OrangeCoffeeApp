@@ -55,24 +55,20 @@ import java.util.*
 
 
 @AndroidEntryPoint
-class CustomerHomeActivity : AppCompatActivity(), OnLocaleChangedListener {
+class CustomerHomeActivity : LocalizationActivity(){
     private val TAG = "CustomerHomeActivity"
     private lateinit var navController: NavController
     private lateinit var navHostFragment: NavHostFragment
     private lateinit var bottomNavigation: BottomNavigationView
     private lateinit var customerActivityBinding: ActivityCustomerMainBinding
-    private val localizationDelegate = LocalizationActivityDelegate(this)
+   // private val localizationDelegate = LocalizationActivityDelegate(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        localizationDelegate.addOnLocaleChangedListener(this)
-        localizationDelegate.onCreate()
+
         super.onCreate(savedInstanceState)
         customerActivityBinding = ActivityCustomerMainBinding.inflate(layoutInflater)
         val view = customerActivityBinding.root
         setContentView(view)
-
-        setLanguage("eng")
-        Log.d(TAG,currentLanguage.toLanguageTag().toString())
 
         bottomNavigation = customerActivityBinding.customerBottomNavigationView
         navHostFragment =
@@ -101,7 +97,9 @@ class CustomerHomeActivity : AppCompatActivity(), OnLocaleChangedListener {
                     supportActionBar?.show()
                     showBottomNav()
                 }
-
+                R.id.customerOrdersFragment -> {
+                    showBottomNav()
+                }
                 else -> hideBottomNav()
             }
         }
@@ -116,39 +114,31 @@ class CustomerHomeActivity : AppCompatActivity(), OnLocaleChangedListener {
         bottomNavigation.visibility = View.GONE
     }
 
-    //Localization
 
-    public override fun onResume() {
-        super.onResume()
-        localizationDelegate.onResume(this)
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater = menuInflater
+        inflater.inflate(R.menu.options_menu, menu)
+        return true
     }
 
-    override fun attachBaseContext(newBase: Context) {
-        applyOverrideConfiguration(localizationDelegate.updateConfigurationLocale(newBase))
-        super.attachBaseContext(newBase)
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle item selection
+        return when (item.itemId) {
+            R.id.updateProfile -> {
+                //navController.navigate(R.id.action_global_editUser)
+                true
+            }
+            R.id.arabicLang ->{
+                setLanguage("ar")
+                true
+            }
+            R.id.englishLang ->{
+                setLanguage("eng")
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
-    override fun getApplicationContext(): Context {
-        return localizationDelegate.getApplicationContext(super.getApplicationContext())
-    }
-
-    override fun getResources(): Resources {
-        return localizationDelegate.getResources(super.getResources())
-    }
-
-    fun setLanguage(language: String?) {
-        localizationDelegate.setLanguage(this, language!!)
-    }
-
-    fun setLanguage(locale: Locale?) {
-        localizationDelegate.setLanguage(this, locale!!)
-    }
-
-    val currentLanguage: Locale
-        get() = localizationDelegate.getLanguage(this)
-
-    // Just override method locale change event
-    override fun onBeforeLocaleChanged() {}
-    override fun onAfterLocaleChanged() {}
 }
 

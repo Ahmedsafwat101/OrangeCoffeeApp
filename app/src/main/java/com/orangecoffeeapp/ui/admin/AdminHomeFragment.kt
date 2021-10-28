@@ -16,7 +16,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.databinding.FragmentAdminHomeBinding
-import com.orangecoffeeapp.ui.adapters.LinkedRecyclerAdapter
+import com.orangecoffeeapp.ui.adapters.LinkedCarAdapter
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
 import com.orangecoffeeapp.utils.common.DataState
@@ -26,7 +26,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class AdminHomeFragment : Fragment() {
     private  val TAG = "AdminHomeFragment"
-    private lateinit var linkedAdapter: LinkedRecyclerAdapter
+    private lateinit var linkedAdapter: LinkedCarAdapter
     private lateinit var homeBinding: FragmentAdminHomeBinding
     private var linkedData:ArrayList<LinkedCarsWithOwners> = ArrayList()
     private val linkingViewModel: LinkingViewModel by viewModels()
@@ -105,7 +105,7 @@ class AdminHomeFragment : Fragment() {
         homeBinding.linkedRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-            linkedAdapter = LinkedRecyclerAdapter(::onItemClicked)
+            linkedAdapter = LinkedCarAdapter(::onItemClicked)
             this.adapter = linkedAdapter
         }
         addCarsDataSet()

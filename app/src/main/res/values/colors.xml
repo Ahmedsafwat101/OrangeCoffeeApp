@@ -64,4 +64,10 @@
     <color name="Beige_200">#F1CA89</color>
     <color name="gray_400">#C8C2BC</color>
     <color name="Coffee_200">#CC9B6D</color>
+
+    <!---StatusColors-->
+    <color name="MetallicSeaweed">#077E8C</color>
+    <color name="Topaz">#F7CB73</color>
+    <color name="RoyalOrange">#e76f51</color>
+    <color name="Flame">#D9512C</color>
 </resources>

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/margin_normal"
+    android:layout_marginTop="10dp"
+    android:backgroundTint="@color/gray_200"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="10dp"
+    app:cardPreventCornerOverlap="false">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/contentTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Order"
+            android:textColor="@color/Brown_400"
+            android:textSize="32sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:id="@+id/orderContentTxt"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/nunito_bold"
+            android:paddingLeft="16dp"
+            android:paddingBottom="8dp"
+            android:textColor="@color/Brown_400"
+            android:text="Mocaa 2x cups \nMocaa 2x cups \nMocaa 2x cups"
+            android:textSize="24sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/contentTitleTxt" />
+
+        <TextView
+            android:id="@+id/priceTitleTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            android:text="Price"
+            android:textColor="@color/Brown_400"
+            app:layout_constraintHorizontal_bias="0"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/orderContentTxt" />
+
+
+        <TextView
+            android:id="@+id/priceContentTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_bold"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:text="20"
+            android:textColor="@color/Brown_400"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/priceTitleTxt"
+            app:layout_constraintTop_toBottomOf="@+id/orderContentTxt" />
+
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="PROCESSING"
+            android:textSize="18sp"
+            android:textColor="@color/Brown_400"
+            android:fontFamily="@font/nunito_bold"
+            app:layout_constraintHorizontal_bias="0.9"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/contentTitleTxt"
+            app:layout_constraintTop_toTopOf="parent"
+            app:chipBackgroundColor="@color/RoyalOrange"/>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

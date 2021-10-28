@@ -18,7 +18,7 @@ import com.orangecoffeeapp.data.models.CarModel
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.FragmentLinkingBinding
 import com.orangecoffeeapp.ui.adapters.CarRecyclerAdapter
-import com.orangecoffeeapp.ui.adapters.OwnerRecyclerAdapter
+import com.orangecoffeeapp.ui.adapters.OwnerAdapter
 import com.orangecoffeeapp.ui.edituser.EditUserActivity
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
 import com.orangecoffeeapp.utils.common.DataState
@@ -28,7 +28,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class LinkingFragment : Fragment(){
     private val TAG = "LinkingFragment"
 
-    private lateinit var ownerAdapter: OwnerRecyclerAdapter
+    private lateinit var ownerAdapter: OwnerAdapter
     private lateinit var carAdapter: CarRecyclerAdapter;
 
     lateinit var linkingBinding: FragmentLinkingBinding
@@ -188,7 +188,7 @@ class LinkingFragment : Fragment(){
         linkingBinding.ownerRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false)
-            ownerAdapter = OwnerRecyclerAdapter(::onOwnerItemClicked,::onOwnerItemClickedShowDetails)
+            ownerAdapter = OwnerAdapter(::onOwnerItemClicked,::onOwnerItemClickedShowDetails)
             this.adapter = ownerAdapter
         }
         addOwnerDataSet()

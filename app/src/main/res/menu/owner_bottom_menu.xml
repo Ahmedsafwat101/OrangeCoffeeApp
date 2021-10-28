@@ -6,4 +6,11 @@
         android:icon="@drawable/menu"
         />
 
+    <item
+        android:id="@+id/ownerOrderFragment"
+        android:title="Orders"
+        android:icon="@drawable/waitress"
+        />
+
+
 </menu>

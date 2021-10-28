@@ -12,7 +12,7 @@ import com.orangecoffeeapp.constants.Constants
 import com.orangecoffeeapp.data.models.MenuItemModel
 import com.orangecoffeeapp.databinding.RecyclerMenuOrderBinding
 
-class OrderRecyclerAdapter(
+class CustomerOrderAdapter(
     var getValue: (Float) -> Unit = {},
     var getUpdatedMap: (MenuItemModel, Int) -> Unit,
     var incrementAndDecrement: (Float) -> Unit = {}

@@ -1,6 +1,7 @@
 package com.orangecoffeeapp.ui.customer
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.location.Location
@@ -17,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.orangecoffeeapp.R
 import com.orangecoffeeapp.data.models.LinkedCarsWithOwners
 import com.orangecoffeeapp.databinding.FragmentCustomerHomeBinding
-import com.orangecoffeeapp.ui.adapters.CustomerCarRecyclerAdapter
+import com.orangecoffeeapp.ui.adapters.CustomerCarAdapter
 import com.orangecoffeeapp.ui.viewmodels.LinkingViewModel
 import com.orangecoffeeapp.utils.common.DataState
 import com.orangecoffeeapp.utils.common.DisplayHelper
@@ -31,15 +32,12 @@ import com.orangecoffeeapp.utils.customer.LocationComparator
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
-
-
 @AndroidEntryPoint
-class CustomerHomeFragment : Fragment() {
+class CustomerHomeFragment : Fragment(){
 
     private lateinit var fusedLocationClient: FusedLocationProviderClient
-
     private val TAG = "CustomerHomeFragment"
-    private lateinit var linkedCarAdapter: CustomerCarRecyclerAdapter
+    private lateinit var linkedCarAdapter: CustomerCarAdapter
     private val gpsViewModel: LocationViewModel by viewModels()
     private val linkingViewModel: LinkingViewModel by viewModels()
     private var linkedData: ArrayList<LinkedCarsWithOwners> = ArrayList()
@@ -107,16 +105,14 @@ class CustomerHomeFragment : Fragment() {
                     Log.d(TAG, "")
                 }
             }
-
         })
-
     }
 
     private fun initRecyclerView() {
         binding.CarsRecView.apply {
             this.layoutManager =
                 LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
-            linkedCarAdapter = CustomerCarRecyclerAdapter(::recyclerOnClick)
+            linkedCarAdapter = CustomerCarAdapter(::recyclerOnClick)
             this.adapter = linkedCarAdapter
         }
         addCarsDataSet()

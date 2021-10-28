@@ -1,5 +1,6 @@
 package com.orangecoffeeapp.data.models
 
+import com.orangecoffeeapp.constants.OrdersStatus
 import java.io.Serializable
 
 data class Order(
@@ -9,5 +10,5 @@ data class Order(
     val date:String="",
     val orderContentKeys:List<MenuItemModel> = ArrayList(),
     val orderContentValues:List<Int> = ArrayList(),
-
+    var orderStatus: OrdersStatus = OrdersStatus.Pending
     ):Serializable

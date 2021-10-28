@@ -6,7 +6,7 @@ import com.orangecoffeeapp.constants.ErrorMessage.NONE
 
 object AddOrderUtils {
     fun validateOrder(orderContent: List<Int>):String{
-        if(orderContent.isNotEmpty()) return ERROR_EMPTY_ORDER_CONTENT
+        if(orderContent.isEmpty()) return ERROR_EMPTY_ORDER_CONTENT
         return NONE
     }
 }

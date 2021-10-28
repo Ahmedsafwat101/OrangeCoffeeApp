@@ -11,7 +11,7 @@ import com.orangecoffeeapp.constants.Constants.OWNER_IMG_URL
 import com.orangecoffeeapp.data.models.UserModel
 import com.orangecoffeeapp.databinding.RecyclerItemBinding
 
-class OwnerRecyclerAdapter(var onClick: (Int)->Unit ={} ,var onLongClick:(Int)-> Unit ={}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class OwnerAdapter(var onClick: (Int)->Unit ={}, var onLongClick:(Int)-> Unit ={}) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var owners = ArrayList<UserModel>()
 

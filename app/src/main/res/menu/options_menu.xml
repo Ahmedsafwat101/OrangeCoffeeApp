@@ -2,7 +2,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item android:id="@+id/updateProfile" android:title="Update Profile"
+    <item android:id="@+id/updateProfile" android:title="@string/update_profile"
         app:showAsAction="withText"/>
-    />
+
+    <item android:id="@+id/languages"
+        android:title="@string/change_language" >
+        <!-- "file" submenu -->
+        <menu>
+            <item android:id="@+id/arabicLang"
+                android:title="@string/arabic" />
+            <item android:id="@+id/englishLang"
+                android:title="@string/english" />
+        </menu>
+    </item>
 </menu>
